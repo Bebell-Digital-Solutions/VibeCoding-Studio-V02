@@ -231,8 +231,13 @@
             <img src="https://bucket.mlcdn.com/a/3336/3336910/images/2a926c37fc929607aeed2f835f3a06e0e9f3cff8.png" alt="VibeCoding Studio Logo" class="brand-logo">
             <span class="brand-text">VibeCoding Studio</span>
         </div>
-        <div id="auth-widget"></div>
+    <div id="auth-widget">
+        <a href="#" id="logout-link" style="color: white; text-decoration: none; font-weight: 500;">Log Out</a>
     </div>
+</div>
+
+
+    
     
     <div class="container">
         <div class="panel">
@@ -243,7 +248,8 @@
                         <option value="">Select LLM...</option>
                         <option value="https://example.com">Example.com (Test)</option> 
                         <option value="https://admin.chatterbot.support/share/1897a236136449eb9e2be847c04b1a5d">ChatGPT 4.5</option>
-                        <option value="https://admin.chatterbot.support/share/6229350fc344462cbc8d22a482bcdfaf">DeepSeek-R1</option>
+                        <option value="https://admin.chatterbot.support/share/6229350fc344462cbc8d22a482bcdfaf">DeepSeek-R1</option
+                        <option value="https://admin.chatterbot.support/share/8fcf0b7b2d43406d871b4411bb5426f8">Claude 3.7 Sonnet</option>
                         <option value="https://chat.qwen.ai/">Qwen3</option>
                     </select>
                 </div>
@@ -305,7 +311,13 @@
         </div>
     </div>
 
+    
+    
+    
+    
     <script>
+
+
     (function() {
         // DOM Elements
         const elements = {
@@ -321,6 +333,10 @@
             preloader: document.getElementById('preloader')
         };
 
+
+
+        
+
         // Constants
         const BLOCKED_DOMAINS = [
             'openai.com', 
@@ -333,12 +349,41 @@
         const MIN_LOADER_TIME = 2000;
         let loaderStartTime = Date.now();
 
+
+
+        
+
         // Initialize
         function init() {
             setupEventListeners();
             initViewer();
             handlePreloader();
         }
+
+
+
+// Add to your existing script (around line 600)
+document.getElementById('logout-link').addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    // Show preloader during logout transition
+    document.getElementById('preloader').style.display = 'flex';
+    document.getElementById('preloader').style.opacity = '1';
+    
+    // Clear any session data (customize as needed)
+    localStorage.removeItem('userToken');
+    sessionStorage.clear();
+    
+    // Redirect to login after a brief delay for smooth UX
+    setTimeout(function() {
+        window.location.href = 'login.html'; // Change to your login page URL
+    }, 1000);
+});
+
+
+
+        
+        
 
         // Event Listeners
         function setupEventListeners() {
@@ -356,6 +401,8 @@
                 elements.editor.addEventListener('keydown', handleTabIndent);
             }
         }
+
+        
 
         // Browser Functions
         function navigateBrowser() {
