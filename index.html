@@ -226,11 +226,12 @@
         <div class="bars"></div>
     </div>
 
-    <div class="top-bar">
-        <div class="brand">
-            <img src="https://bucket.mlcdn.com/a/3336/3336910/images/2a926c37fc929607aeed2f835f3a06e0e9f3cff8.png" alt="VibeCoding Studio Logo" class="brand-logo">
-            <span class="brand-text">VibeCoding Studio</span>
-        </div>
+<!-- In the top-bar div (keep this as is) -->
+<div class="top-bar">
+    <div class="brand">
+        <img src="https://bucket.mlcdn.com/a/3336/3336910/images/2a926c37fc929607aeed2f835f3a06e0e9f3cff8.png" alt="VibeCoding Studio Logo" class="brand-logo">
+        <span class="brand-text">VibeCoding Studio</span>
+    </div>
     <div id="auth-widget">
         <a href="#" id="logout-link" style="color: white; text-decoration: none; font-weight: 500;">Log Out</a>
     </div>
@@ -362,23 +363,33 @@
 
 
 
-// Add to your existing script (around line 600)
-document.getElementById('logout-link').addEventListener('click', function(e) {
+function handleLogout(e) {
     e.preventDefault();
     
-    // Show preloader during logout transition
+    // Show loading state
     document.getElementById('preloader').style.display = 'flex';
     document.getElementById('preloader').style.opacity = '1';
     
-    // Clear any session data (customize as needed)
-    localStorage.removeItem('userToken');
+    // Clear all client-side data
+    localStorage.clear();
     sessionStorage.clear();
     
-    // Redirect to login after a brief delay for smooth UX
-    setTimeout(function() {
-        window.location.href = 'login.html'; // Change to your login page URL
-    }, 1000);
-});
+    // Clear sensitive editor content
+    document.getElementById('editor').value = '';
+    
+    // Redirect after delay
+    setTimeout(() => {
+        window.location.href = 'login.html'; // or your login page
+    }, 800);
+    
+    return false;
+}
+
+
+
+
+
+
 
 
 
@@ -386,21 +397,27 @@ document.getElementById('logout-link').addEventListener('click', function(e) {
         
 
         // Event Listeners
-        function setupEventListeners() {
-            if (elements.goButton) elements.goButton.addEventListener('click', navigateBrowser);
-            if (elements.urlInput) elements.urlInput.addEventListener('keypress', (e) => e.key === 'Enter' && navigateBrowser());
-            if (elements.llmSelector) elements.llmSelector.addEventListener('change', handleLLMSelect);
-            if (elements.openTabBtn) elements.openTabBtn.addEventListener('click', openInNewTab);
-            if (elements.downloadBtn) elements.downloadBtn.addEventListener('click', downloadHTML);
-            if (elements.editor) {
-                let debounceTimer;
-                elements.editor.addEventListener('input', () => {
-                    clearTimeout(debounceTimer);
-                    debounceTimer = setTimeout(updateViewer, 300);
-                });
-                elements.editor.addEventListener('keydown', handleTabIndent);
-            }
-        }
+function setupEventListeners() {
+    if (elements.goButton) elements.goButton.addEventListener('click', navigateBrowser);
+    if (elements.urlInput) elements.urlInput.addEventListener('keypress', (e) => e.key === 'Enter' && navigateBrowser());
+    if (elements.llmSelector) elements.llmSelector.addEventListener('change', handleLLMSelect);
+    if (elements.openTabBtn) elements.openTabBtn.addEventListener('click', openInNewTab);
+    if (elements.downloadBtn) elements.downloadBtn.addEventListener('click', downloadHTML);
+    
+    // Add this line to handle logout
+    if (document.getElementById('logout-link')) {
+        document.getElementById('logout-link').addEventListener('click', handleLogout);
+    }
+    
+    if (elements.editor) {
+        let debounceTimer;
+        elements.editor.addEventListener('input', () => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(updateViewer, 300);
+        });
+        elements.editor.addEventListener('keydown', handleTabIndent);
+    }
+}
 
         
 
