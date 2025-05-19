@@ -293,11 +293,13 @@
                 <div class="panel-actions">
                     <select id="llm-selector" class="panel-action-btn">
                         <option value="">Select LLM...</option>
-                        <option value="https://example.com">Example.com (Test)</option> 
                         <option value="https://admin.chatterbot.support/share/1897a236136449eb9e2be847c04b1a5d">ChatGPT 4.5</option>
                         <option value="https://admin.chatterbot.support/share/6229350fc344462cbc8d22a482bcdfaf">DeepSeek-R1</option
                         <option value="https://admin.chatterbot.support/share/8fcf0b7b2d43406d871b4411bb5426f8">Claude 3.7 Sonnet</option>
                         <option value="https://chat.qwen.ai/">Qwen3</option>
+                        <option value="https://example.com">Example.com (Test)</option> 
+
+                
                     </select>
                 </div>
             </div>
@@ -390,9 +392,9 @@
             'claude.ai',
             'google.com',
             'deepseek.com',
-            'perplexity.ai',
-            'qwen.ai'
         ];
+
+        
         const MIN_LOADER_TIME = 2000;
         let loaderStartTime = Date.now();
 
@@ -627,7 +629,8 @@ function setupEventListeners() {
                     </style>
                 </head>
                 <body>
-                    <p>Live preview will appear here as you type.</p>
+
+
                 </body>
                 </html>`;
         }
