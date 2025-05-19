@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-Panel Interface - VibeCoding Studio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #df1783;
+            --dark-bg: #1a1a1a;
+            --panel-bg: #252526;
+            --text-light: #e0e0e0;
+            --border-color: #444;
+            --input-bg: #3a3a3a;
+        }
+        
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Fira Code', monospace;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            font-size: 14px;
+        }
+        
+        .top-bar {
+            background: var(--primary-color);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+            box-sizing: border-box;
+        }
+
+
+        
+        
+        .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-logo {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+}
+
+.brand-text {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: white;
+}
+
+
+        .container {
+            display: flex;
+            height: calc(100vh - 50px);
+        }
+        
+        .panel {
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--border-color);
+            background: var(--panel-bg);
+        }
+        .panel:last-child {
+            border-right: none;
+        }
+        
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: var(--panel-bg);
+            border-bottom: 1px solid #333;
+            user-select: none;
+            flex-shrink: 0;
+        }
+        
+        .panel-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .panel-action-btn, #llm-selector, #go-button {
+            background: var(--input-bg);
+            color: var(--text-light);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-size: 0.9em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+            font-family: 'Fira Code', monospace;
+        }
+        .panel-action-btn:hover, #llm-selector:hover, #go-button:hover {
+            background-color: #454545;
+            border-color: #555;
+        }
+        #go-button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            margin-left: 8px;
+        }
+         #go-button:hover {
+            background-color: #c81473;
+        }
+
+        .panel-content {
+            flex: 1;
+            overflow: auto;
+            position: relative;
+        }
+        
+        iframe {
+            background: white;
+            border: none;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        
+        .url-bar {
+            display: flex;
+            padding: 10px;
+            background: var(--panel-bg);
+            border-bottom: 1px solid #333;
+            flex-shrink: 0;
+        }
+        
+        #url-input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background: var(--input-bg);
+            color: var(--text-light);
+            font-family: 'Fira Code', monospace;
+        }
+        
+        pre[class*="language-"] {
+            margin: 0 !important;
+            height: 100%;
+            border-radius: 0;
+            background: #1e1e1e !important;
+            padding: 15px !important;
+            box-sizing: border-box;
+            overflow: auto !important;
+        }
+        
+        #editor {
+            outline: none;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: var(--text-light) !important;
+            background: transparent !important;
+            height: 100%;
+            width: 100%;
+            display: block;
+            font-family: 'Fira Code', monospace;
+            resize: none;
+            border: none;
+            padding: 15px;
+            box-sizing: border-box;
+            line-height: 1.5;
+        }
+
+        .iframe-load-info {
+            padding: 20px;
+            text-align: center;
+            color: #aaa;
+            font-size: 0.9em;
+        }
+        
+        .iframe-error {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-bar">
+    <div class="brand">
+        <img src="https://bucket.mlcdn.com/a/3336/3336910/images/2a926c37fc929607aeed2f835f3a06e0e9f3cff8.png" alt="VibeCoding Studio Logo" class="brand-logo">
+        <span class="brand-text">VibeCoding Studio</span>
+    </div>
+    <div id="auth-widget"></div>
+</div>
+
+
+    
+    <div class="container">
+        <div class="panel">
+            <div class="panel-header">
+                <span>🤖 Assistant Model:</span>
+                <div class="panel-actions">
+                    <select id="llm-selector" class="panel-action-btn">
+                        <option value="">Select LLM...</option>
+                        <option value="https://example.com">Example.com (Test)</option> 
+                        <option value="https://admin.chatterbot.support/share/1897a236136449eb9e2be847c04b1a5d">ChatGPT 4.5</option>
+                        <option value="https://admin.chatterbot.support/share/6229350fc344462cbc8d22a482bcdfaf">DeepSeek-R1</option>
+                        <option value="https://chat.qwen.ai/">Qwen3</option>
+                        
+                    </select>
+                </div>
+            </div>
+            <div class="url-bar">
+                <input type="text" id="url-input" placeholder="Enter URL (e.g., https://example.com)">
+                <button id="go-button">Go</button>
+            </div>
+            <div class="panel-content">
+                <iframe id="browser" src="about:blank" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+                <div id="browser-info" class="iframe-load-info" style="display: none;">
+                    <p class="iframe-error">Many websites prevent themselves from being loaded in iframes for security reasons.</p>
+                    <p>If a site doesn't load, try opening it in a new tab.</p>
+                    <button id="open-tab-btn" style="margin-top:10px; padding:5px 10px; background:var(--primary-color); color:white; border:none; border-radius:4px;">
+                        Open in New Tab
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel">
+            <div class="panel-header">
+                <span>💬 HTML Editor</span>
+                <div class="panel-actions">
+                    <button id="download-btn" class="panel-action-btn" title="Download HTML">
+                        <svg viewBox="0 0 24 24" width="14" height="14" style="margin-right: 5px;">
+                            <path fill="currentColor" d="M19,9H15V3H9V9H5L12,16L19,9M5,20V18H19V20H5Z"/>
+                        </svg>
+                        Export
+                    </button>
+                </div>
+            </div>
+            <div class="panel-content">
+                <textarea id="editor" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;My Page&lt;/title&gt;
+    &lt;style&gt;
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f0f0f0; }
+        h1 { color: #df1783; }
+        p { color: #333; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Welcome to VibeCoding Studio!&lt;/h1&gt;
+    &lt;p&gt;This is a sample HTML document. Edit me as you please!&lt;/p&gt;
+    &lt;script&gt;console.log('Sample script executed!');&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+            </div>
+        </div>
+        
+        <div class="panel">
+            <div class="panel-header">🔎 Live Preview</div>
+            <div class="panel-content">
+                <iframe id="viewer" title="Live HTML Preview" sandbox="allow-scripts"></iframe>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+
+  <script>
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Cache DOM elements
+    const elements = {
+        urlInput: document.getElementById('url-input'),
+        goButton: document.getElementById('go-button'),
+        browserFrame: document.getElementById('browser'),
+        browserInfo: document.getElementById('browser-info'),
+        editor: document.getElementById('editor'),
+        viewer: document.getElementById('viewer'),
+        llmSelector: document.getElementById('llm-selector'),
+        downloadBtn: document.getElementById('download-btn'),
+        openTabBtn: document.getElementById('open-tab-btn'),
+        overlay: document.getElementById('pd_masking_overlay_product-38000')
+    };
+
+    // Constants
+    const BLOCKED_DOMAINS = [
+        'chat.openai.com', 
+        'claude.ai',
+        'gemini.google.com',
+        'chat.deepseek.com',
+        'perplexity.ai',
+        'chat.qwen.ai'
+    ];
+    const MIN_LOADER_TIME = 3000; // 3 seconds
+
+    // Initialize viewer with safe content
+    function initViewer() {
+        try {
+            const safeContent = `<!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Preview</title>
+                    <style>
+                        body { 
+                            background: white; 
+                            padding: 20px; 
+                            font-family: Arial, sans-serif;
+                            color: #333;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <p>Live preview will appear here as you type.</p>
+                </body>
+                </html>`;
+            
+            elements.viewer.srcdoc = safeContent;
+        } catch (e) {
+            console.error('Error initializing viewer:', e);
+        }
+    }
+
+    // Browser navigation with enhanced security
+    function navigateBrowser() {
+        const url = elements.urlInput.value.trim();
+        if (!url) return;
+
+        try {
+            // Process URL
+            let processedUrl = url;
+            if (!/^https?:\/\//i.test(url)) {
+                processedUrl = `https://${url}`;
+            }
+
+            // Validate URL
+            const urlObj = new URL(processedUrl);
+            const domain = urlObj.hostname.replace('www.', '');
+            
+            // Check against blocked domains
+            if (BLOCKED_DOMAINS.some(d => domain.includes(d))) {
+                showBrowserError();
+                elements.browserFrame.src = 'about:blank';
+                return;
+            }
+
+            // Show loader
+            showLoader();
+            
+            // Set up iframe with sandbox attributes for security
+            elements.browserFrame.setAttribute('sandbox', 'allow-same-origin allow-scripts allow-popups allow-forms');
+            elements.browserFrame.src = processedUrl;
+            
+            // Handle iframe load events
+            elements.browserFrame.onload = function() {
+                setTimeout(hideLoader, MIN_LOADER_TIME);
+                hideBrowserError();
+            };
+            
+            elements.browserFrame.onerror = function() {
+                showBrowserError();
+                hideLoader();
+            };
+
+        } catch (e) {
+            console.error('Invalid URL:', e);
+            showBrowserError();
+            hideLoader();
+        }
+    }
+
+    // Loader control functions
+    function showLoader() {
+        if (elements.overlay) {
+            elements.overlay.style.display = 'flex';
+        }
+    }
+
+    function hideLoader() {
+        if (elements.overlay) {
+            elements.overlay.style.display = 'none';
+        }
+    }
+
+    function showBrowserError() {
+        if (elements.browserInfo) {
+            elements.browserInfo.style.display = 'block';
+        }
+    }
+
+    function hideBrowserError() {
+        if (elements.browserInfo) {
+            elements.browserInfo.style.display = 'none';
+        }
+    }
+    
+    // Throttled viewer update
+    let updateTimeout;
+    function updateViewer() {
+        try {
+            // Use srcdoc instead of document.write for better security
+            elements.viewer.srcdoc = elements.editor.value;
+        } catch (e) {
+            console.error('Error updating viewer:', e);
+        }
+    }
+
+    // Event listeners with checks for element existence
+    if (elements.goButton) {
+        elements.goButton.addEventListener('click', navigateBrowser);
+    }
+    
+    if (elements.urlInput) {
+        elements.urlInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') navigateBrowser();
+        });
+    }
+    
+    if (elements.llmSelector) {
+        elements.llmSelector.addEventListener('change', function() {
+            const selectedValue = this.value;
+            if (selectedValue) {
+                elements.urlInput.value = selectedValue;
+                navigateBrowser();
+            }
+        });
+    }
+    
+    if (elements.openTabBtn) {
+        elements.openTabBtn.addEventListener('click', function() {
+            const url = elements.urlInput.value.trim();
+            if (url) {
+                window.open(url, '_blank', 'noopener,noreferrer');
+            }
+        });
+    }
+
+    if (elements.editor) {
+        editor.addEventListener('input', function() {
+            clearTimeout(updateTimeout);
+            updateTimeout = setTimeout(updateViewer, 300);
+        });
+        
+        // Add auto-indent functionality
+        editor.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                e.preventDefault();
+                const start = this.selectionStart;
+                const end = this.selectionEnd;
+                
+                this.value = this.value.substring(0, start) + '    ' + this.value.substring(end);
+                this.selectionStart = this.selectionEnd = start + 4;
+            }
+        });
+    }
+
+    if (elements.downloadBtn) {
+        elements.downloadBtn.addEventListener('click', function() {
+            try {
+                const blob = new Blob([elements.editor.value], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'vibecoding-document.html';
+                document.body.appendChild(a);
+                a.click();
+                
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 100);
+            } catch (e) {
+                console.error('Error creating download:', e);
+                alert('Error creating download. Please check console for details.');
+            }
+        });
+    }
+
+    // Initialize components
+    initViewer();
+    updateViewer();
+});
+
+// Load protect.js with error handling
+(function(d, t) {
+    try {
+        var hs = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        
+        hs.src = 'https://app.productdyno.com/assets/js/protect.js';
+        hs.setAttribute('data-auth-type', 'product');
+        hs.setAttribute('data-auth-type-id', '38000');
+        
+        // Error handling
+        hs.onerror = function() {
+            console.error('Failed to load protect.js');
+            document.getElementById('pd_masking_overlay_product-38000').style.display = 'none';
+        };
+        
+        s.parentNode.insertBefore(hs, s);
+    } catch (e) {
+        console.error('Error loading protect.js:', e);
+    }
+}(document, 'script'));
+</script>
+        
+
+    
+    
+</body>
+</html>
