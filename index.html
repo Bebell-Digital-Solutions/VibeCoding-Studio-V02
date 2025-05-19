@@ -7,103 +7,40 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <style>
-
-
- /* Preloader Styles */
-    #preloader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #fff;
-      z-index: 9999;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    .bars {
-      width: 50.4px;
-      height: 67.2px;
-      --c: linear-gradient(#df1783 0 0);
-      background: var(--c) 0% 50%,
-                 var(--c) 50% 50%,
-                 var(--c) 100% 50%;
-      background-size: 10.1px 50%;
-      background-repeat: no-repeat;
-      animation: bars-animation 1s infinite linear alternate;
-    }
-    
-    @keyframes bars-animation {
-      20% { background-size: 10.1px 20%, 10.1px 50%, 10.1px 50%; }
-      40% { background-size: 10.1px 100%, 10.1px 20%, 10.1px 50%; }
-      60% { background-size: 10.1px 50%, 10.1px 100%, 10.1px 20%; }
-      80% { background-size: 10.1px 50%, 10.1px 50%, 10.1px 100%; }
-    }
-  </style>
-</head>
-
-<body>
-  <!-- Preloader HTML (put immediately after opening <body>) -->
-  <div id="preloader">
-    <div class="bars"></div>
-  </div>
-
-  <!-- Your page content here -->
-  
-  <!-- Hide preloader when page loads -->
-  <script>
-    window.addEventListener('load', function() {
-      setTimeout(function() {
-        document.getElementById('preloader').style.opacity = '0';
-        setTimeout(function() {
-          document.getElementById('preloader').style.display = 'none';
-        }, 500); // Match this with the transition time
-      }, 1000); // Minimum display time (1 second)
-    });
-  </script>
-</body>
-Option 2: Enhanced JavaScript Version (Add to <head>)
-html
-<head>
-  <style>
-    #preloader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #fff;
-      z-index: 9999;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: opacity 0.5s ease;
-    }
-    
-    .bars {
-      width: 50.4px;
-      height: 67.2px;
-      --c: linear-gradient(#df1783 0 0);
-      background: var(--c) 0% 50%,
-                 var(--c) 50% 50%,
-                 var(--c) 100% 50%;
-      background-size: 10.1px 50%;
-      background-repeat: no-repeat;
-      animation: bars-animation 1s infinite linear alternate;
-    }
-    
-    @keyframes bars-animation {
-      20% { background-size: 10.1px 20%, 10.1px 50%, 10.1px 50%; }
-      40% { background-size: 10.1px 100%, 10.1px 20%, 10.1px 50%; }
-      60% { background-size: 10.1px 50%, 10.1px 100%, 10.1px 20%; }
-      80% { background-size: 10.1px 50%, 10.1px 50%, 10.1px 100%; }
-    }
-
-
-
+        /* Preloader Styles */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
         
+        .bars {
+            width: 50.4px;
+            height: 67.2px;
+            --c: linear-gradient(#df1783 0 0);
+            background: var(--c) 0% 50%,
+                       var(--c) 50% 50%,
+                       var(--c) 100% 50%;
+            background-size: 10.1px 50%;
+            background-repeat: no-repeat;
+            animation: bars-animation 1s infinite linear alternate;
+        }
+        
+        @keyframes bars-animation {
+            20% { background-size: 10.1px 20%, 10.1px 50%, 10.1px 50%; }
+            40% { background-size: 10.1px 100%, 10.1px 20%, 10.1px 50%; }
+            60% { background-size: 10.1px 50%, 10.1px 100%, 10.1px 20%; }
+            80% { background-size: 10.1px 50%, 10.1px 50%, 10.1px 100%; }
+        }
+
         :root {
             --primary-color: #df1783;
             --dark-bg: #1a1a1a;
@@ -133,27 +70,23 @@ html
             box-sizing: border-box;
         }
 
-
-        
-        
         .brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-.brand-logo {
-    width: 25px;
-    height: 25px;
-    object-fit: contain;
-}
+        .brand-logo {
+            width: 25px;
+            height: 25px;
+            object-fit: contain;
+        }
 
-.brand-text {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: white;
-}
-
+        .brand-text {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: white;
+        }
 
         .container {
             display: flex;
@@ -288,16 +221,18 @@ html
     </style>
 </head>
 <body>
-
-<div class="top-bar">
-    <div class="brand">
-        <img src="https://bucket.mlcdn.com/a/3336/3336910/images/2a926c37fc929607aeed2f835f3a06e0e9f3cff8.png" alt="VibeCoding Studio Logo" class="brand-logo">
-        <span class="brand-text">VibeCoding Studio</span>
+    <!-- Single preloader implementation -->
+    <div id="preloader">
+        <div class="bars"></div>
     </div>
-    <div id="auth-widget"></div>
-</div>
 
-
+    <div class="top-bar">
+        <div class="brand">
+            <img src="https://bucket.mlcdn.com/a/3336/3336910/images/2a926c37fc929607aeed2f835f3a06e0e9f3cff8.png" alt="VibeCoding Studio Logo" class="brand-logo">
+            <span class="brand-text">VibeCoding Studio</span>
+        </div>
+        <div id="auth-widget"></div>
+    </div>
     
     <div class="container">
         <div class="panel">
@@ -310,7 +245,6 @@ html
                         <option value="https://admin.chatterbot.support/share/1897a236136449eb9e2be847c04b1a5d">ChatGPT 4.5</option>
                         <option value="https://admin.chatterbot.support/share/6229350fc344462cbc8d22a482bcdfaf">DeepSeek-R1</option>
                         <option value="https://chat.qwen.ai/">Qwen3</option>
-                        
                     </select>
                 </div>
             </div>
@@ -371,202 +305,141 @@ html
         </div>
     </div>
 
-    
+    <script>
+    (function() {
+        // DOM Elements
+        const elements = {
+            urlInput: document.getElementById('url-input'),
+            goButton: document.getElementById('go-button'),
+            browserFrame: document.getElementById('browser'),
+            browserInfo: document.getElementById('browser-info'),
+            editor: document.getElementById('editor'),
+            viewer: document.getElementById('viewer'),
+            llmSelector: document.getElementById('llm-selector'),
+            downloadBtn: document.getElementById('download-btn'),
+            openTabBtn: document.getElementById('open-tab-btn'),
+            preloader: document.getElementById('preloader')
+        };
 
+        // Constants
+        const BLOCKED_DOMAINS = [
+            'openai.com', 
+            'claude.ai',
+            'google.com',
+            'deepseek.com',
+            'perplexity.ai',
+            'qwen.ai'
+        ];
+        const MIN_LOADER_TIME = 2000;
+        let loaderStartTime = Date.now();
 
-
-  <script>
-// Wait for DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // Cache DOM elements
-    const elements = {
-        urlInput: document.getElementById('url-input'),
-        goButton: document.getElementById('go-button'),
-        browserFrame: document.getElementById('browser'),
-        browserInfo: document.getElementById('browser-info'),
-        editor: document.getElementById('editor'),
-        viewer: document.getElementById('viewer'),
-        llmSelector: document.getElementById('llm-selector'),
-        downloadBtn: document.getElementById('download-btn'),
-        openTabBtn: document.getElementById('open-tab-btn'),
-        overlay: document.getElementById('pd_masking_overlay_product-38000')
-    };
-
-    // Constants
-    const BLOCKED_DOMAINS = [
-        'chat.openai.com', 
-        'claude.ai',
-        'gemini.google.com',
-        'chat.deepseek.com',
-        'perplexity.ai',
-        'chat.qwen.ai'
-    ];
-    const MIN_LOADER_TIME = 3000; // 3 seconds
-
-    // Initialize viewer with safe content
-    function initViewer() {
-        try {
-            const safeContent = `<!DOCTYPE html>
-                <html>
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Preview</title>
-                    <style>
-                        body { 
-                            background: white; 
-                            padding: 20px; 
-                            font-family: Arial, sans-serif;
-                            color: #333;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <p>Live preview will appear here as you type.</p>
-                </body>
-                </html>`;
-            
-            elements.viewer.srcdoc = safeContent;
-        } catch (e) {
-            console.error('Error initializing viewer:', e);
+        // Initialize
+        function init() {
+            setupEventListeners();
+            initViewer();
+            handlePreloader();
         }
-    }
 
-    // Browser navigation with enhanced security
-    function navigateBrowser() {
-        const url = elements.urlInput.value.trim();
-        if (!url) return;
+        // Event Listeners
+        function setupEventListeners() {
+            if (elements.goButton) elements.goButton.addEventListener('click', navigateBrowser);
+            if (elements.urlInput) elements.urlInput.addEventListener('keypress', (e) => e.key === 'Enter' && navigateBrowser());
+            if (elements.llmSelector) elements.llmSelector.addEventListener('change', handleLLMSelect);
+            if (elements.openTabBtn) elements.openTabBtn.addEventListener('click', openInNewTab);
+            if (elements.downloadBtn) elements.downloadBtn.addEventListener('click', downloadHTML);
+            if (elements.editor) {
+                let debounceTimer;
+                elements.editor.addEventListener('input', () => {
+                    clearTimeout(debounceTimer);
+                    debounceTimer = setTimeout(updateViewer, 300);
+                });
+                elements.editor.addEventListener('keydown', handleTabIndent);
+            }
+        }
 
-        try {
-            // Process URL
-            let processedUrl = url;
+        // Browser Functions
+        function navigateBrowser() {
+            const url = elements.urlInput.value.trim();
+            if (!url) return;
+
+            try {
+                const processedUrl = processUrl(url);
+                if (!processedUrl.valid) {
+                    showBrowserError("Invalid URL format");
+                    return;
+                }
+
+                if (isDomainBlocked(processedUrl.hostname)) {
+                    showBrowserError("This domain is restricted for security reasons");
+                    return;
+                }
+
+                showLoader();
+                loadIframe(processedUrl.fullUrl);
+                
+            } catch (e) {
+                console.error('Navigation error:', e);
+                showBrowserError("Error loading URL");
+                hideLoader();
+            }
+        }
+
+        function processUrl(url) {
+            let fullUrl = url;
             if (!/^https?:\/\//i.test(url)) {
-                processedUrl = `https://${url}`;
+                fullUrl = `https://${url}`;
             }
+            
+            const urlObj = new URL(fullUrl);
+            const hostname = urlObj.hostname.replace('www.', '');
+            
+            return {
+                fullUrl: fullUrl,
+                hostname: hostname,
+                valid: true
+            };
+        }
 
-            // Validate URL
-            const urlObj = new URL(processedUrl);
-            const domain = urlObj.hostname.replace('www.', '');
-            
-            // Check against blocked domains
-            if (BLOCKED_DOMAINS.some(d => domain.includes(d))) {
-                showBrowserError();
-                elements.browserFrame.src = 'about:blank';
-                return;
-            }
+        function isDomainBlocked(hostname) {
+            return BLOCKED_DOMAINS.some(domain => {
+                return hostname === domain || hostname.endsWith(`.${domain}`);
+            });
+        }
 
-            // Show loader
-            showLoader();
-            
-            // Set up iframe with sandbox attributes for security
-            elements.browserFrame.setAttribute('sandbox', 'allow-same-origin allow-scripts allow-popups allow-forms');
-            elements.browserFrame.src = processedUrl;
-            
-            // Handle iframe load events
-            elements.browserFrame.onload = function() {
-                setTimeout(hideLoader, MIN_LOADER_TIME);
+        function loadIframe(url) {
+            elements.browserFrame.onload = () => {
+                setTimeout(hideLoader, Math.max(0, MIN_LOADER_TIME - (Date.now() - loaderStartTime)));
                 hideBrowserError();
             };
             
-            elements.browserFrame.onerror = function() {
-                showBrowserError();
+            elements.browserFrame.onerror = () => {
+                showBrowserError("Failed to load URL");
                 hideLoader();
             };
-
-        } catch (e) {
-            console.error('Invalid URL:', e);
-            showBrowserError();
-            hideLoader();
+            
+            elements.browserFrame.src = url;
         }
-    }
 
-    // Loader control functions
-    function showLoader() {
-        if (elements.overlay) {
-            elements.overlay.style.display = 'flex';
-        }
-    }
-
-    function hideLoader() {
-        if (elements.overlay) {
-            elements.overlay.style.display = 'none';
-        }
-    }
-
-    function showBrowserError() {
-        if (elements.browserInfo) {
-            elements.browserInfo.style.display = 'block';
-        }
-    }
-
-    function hideBrowserError() {
-        if (elements.browserInfo) {
-            elements.browserInfo.style.display = 'none';
-        }
-    }
-    
-    // Throttled viewer update
-    let updateTimeout;
-    function updateViewer() {
-        try {
-            // Use srcdoc instead of document.write for better security
-            elements.viewer.srcdoc = elements.editor.value;
-        } catch (e) {
-            console.error('Error updating viewer:', e);
-        }
-    }
-
-    // Event listeners with checks for element existence
-    if (elements.goButton) {
-        elements.goButton.addEventListener('click', navigateBrowser);
-    }
-    
-    if (elements.urlInput) {
-        elements.urlInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') navigateBrowser();
-        });
-    }
-    
-    if (elements.llmSelector) {
-        elements.llmSelector.addEventListener('change', function() {
-            const selectedValue = this.value;
-            if (selectedValue) {
-                elements.urlInput.value = selectedValue;
-                navigateBrowser();
+        // Editor Functions
+        function updateViewer() {
+            try {
+                elements.viewer.srcdoc = elements.editor.value;
+            } catch (e) {
+                console.error('Viewer update error:', e);
             }
-        });
-    }
-    
-    if (elements.openTabBtn) {
-        elements.openTabBtn.addEventListener('click', function() {
-            const url = elements.urlInput.value.trim();
-            if (url) {
-                window.open(url, '_blank', 'noopener,noreferrer');
-            }
-        });
-    }
+        }
 
-    if (elements.editor) {
-        editor.addEventListener('input', function() {
-            clearTimeout(updateTimeout);
-            updateTimeout = setTimeout(updateViewer, 300);
-        });
-        
-        // Add auto-indent functionality
-        editor.addEventListener('keydown', function(e) {
+        function handleTabIndent(e) {
             if (e.key === 'Tab') {
                 e.preventDefault();
                 const start = this.selectionStart;
                 const end = this.selectionEnd;
-                
                 this.value = this.value.substring(0, start) + '    ' + this.value.substring(end);
                 this.selectionStart = this.selectionEnd = start + 4;
             }
-        });
-    }
+        }
 
-    if (elements.downloadBtn) {
-        elements.downloadBtn.addEventListener('click', function() {
+        function downloadHTML() {
             try {
                 const blob = new Blob([elements.editor.value], { type: 'text/html' });
                 const url = URL.createObjectURL(blob);
@@ -575,81 +448,111 @@ document.addEventListener('DOMContentLoaded', function() {
                 a.download = 'vibecoding-document.html';
                 document.body.appendChild(a);
                 a.click();
-                
                 setTimeout(() => {
                     document.body.removeChild(a);
                     URL.revokeObjectURL(url);
                 }, 100);
             } catch (e) {
-                console.error('Error creating download:', e);
+                console.error('Download error:', e);
                 alert('Error creating download. Please check console for details.');
             }
-        });
-    }
+        }
 
-    // Initialize components
-    initViewer();
-    updateViewer();
-});
+        // Utility Functions
+        function handleLLMSelect() {
+            const selectedValue = this.value;
+            if (selectedValue) {
+                elements.urlInput.value = selectedValue;
+                navigateBrowser();
+            }
+        }
 
-// Load protect.js with error handling
-(function(d, t) {
-    try {
-        var hs = d.createElement(t),
-            s = d.getElementsByTagName(t)[0];
-        
-        hs.src = 'https://app.productdyno.com/assets/js/protect.js';
-        hs.setAttribute('data-auth-type', 'product');
-        hs.setAttribute('data-auth-type-id', '38000');
-        
-        // Error handling
-        hs.onerror = function() {
-            console.error('Failed to load protect.js');
-            document.getElementById('pd_masking_overlay_product-38000').style.display = 'none';
-        };
-        
-        s.parentNode.insertBefore(hs, s);
-    } catch (e) {
-        console.error('Error loading protect.js:', e);
-    }
-}(document, 'script'));
+        function openInNewTab() {
+            const url = elements.urlInput.value.trim();
+            if (url) {
+                window.open(url, '_blank', 'noopener,noreferrer');
+            }
+        }
 
+        function showBrowserError(message) {
+            if (elements.browserInfo) {
+                if (message) {
+                    const errorElement = elements.browserInfo.querySelector('.iframe-error');
+                    if (errorElement) errorElement.textContent = message;
+                }
+                elements.browserInfo.style.display = 'block';
+            }
+        }
 
+        function hideBrowserError() {
+            if (elements.browserInfo) elements.browserInfo.style.display = 'none';
+        }
 
+        function showLoader() {
+            loaderStartTime = Date.now();
+            if (elements.preloader) elements.preloader.style.display = 'flex';
+        }
 
-      
+        function hideLoader() {
+            if (elements.preloader) {
+                elements.preloader.style.opacity = '0';
+                setTimeout(() => {
+                    elements.preloader.style.display = 'none';
+                }, 500);
+            }
+        }
 
-      
-   // Show preloader immediately
-    document.addEventListener('DOMContentLoaded', function() {
-      // Preloader will be visible by default
-      
-      // Hide when everything is ready
-      window.addEventListener('load', function() {
-        var preloader = document.getElementById('preloader');
-        var minDisplayTime = 2000; // 2 seconds minimum
-        var startTime = Date.now();
-        
-        // Calculate remaining time to meet minimum display
-        var elapsed = Date.now() - startTime;
-        var remaining = Math.max(0, minDisplayTime - elapsed);
-        
-        setTimeout(function() {
-          preloader.style.opacity = '0';
-          setTimeout(function() {
-            preloader.style.display = 'none';
-          }, 500);
-        }, remaining);
-      });
-    });
+        function initViewer() {
+            elements.viewer.srcdoc = `<!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <title>Preview</title>
+                    <style>
+                        body { 
+                            background: white; 
+                            padding: 20px; 
+                            font-family: Arial, sans-serif;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <p>Live preview will appear here as you type.</p>
+                </body>
+                </html>`;
+        }
 
+        function handlePreloader() {
+            window.addEventListener('load', () => {
+                const elapsed = Date.now() - loaderStartTime;
+                const remaining = Math.max(0, MIN_LOADER_TIME - elapsed);
+                setTimeout(hideLoader, remaining);
+            });
+        }
 
+        // Initialize the application
+        init();
+    })();
 
-      
-</script>
-        
-
-    
-    
+    // ProductDyno script with error handling
+    (function(d, t) {
+        try {
+            var hs = d.createElement(t),
+                s = d.getElementsByTagName(t)[0];
+            
+            hs.src = 'https://app.productdyno.com/assets/js/protect.js';
+            hs.setAttribute('data-auth-type', 'product');
+            hs.setAttribute('data-auth-type-id', '38000');
+            
+            hs.onerror = function() {
+                console.error('Failed to load protect.js');
+            };
+            
+            s.parentNode.insertBefore(hs, s);
+        } catch (e) {
+            console.error('Error loading protect.js:', e);
+        }
+    }(document, 'script'));
+    </script>
 </body>
 </html>
