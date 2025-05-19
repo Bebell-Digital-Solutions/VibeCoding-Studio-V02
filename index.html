@@ -7,6 +7,103 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <style>
+
+
+ /* Preloader Styles */
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .bars {
+      width: 50.4px;
+      height: 67.2px;
+      --c: linear-gradient(#df1783 0 0);
+      background: var(--c) 0% 50%,
+                 var(--c) 50% 50%,
+                 var(--c) 100% 50%;
+      background-size: 10.1px 50%;
+      background-repeat: no-repeat;
+      animation: bars-animation 1s infinite linear alternate;
+    }
+    
+    @keyframes bars-animation {
+      20% { background-size: 10.1px 20%, 10.1px 50%, 10.1px 50%; }
+      40% { background-size: 10.1px 100%, 10.1px 20%, 10.1px 50%; }
+      60% { background-size: 10.1px 50%, 10.1px 100%, 10.1px 20%; }
+      80% { background-size: 10.1px 50%, 10.1px 50%, 10.1px 100%; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Preloader HTML (put immediately after opening <body>) -->
+  <div id="preloader">
+    <div class="bars"></div>
+  </div>
+
+  <!-- Your page content here -->
+  
+  <!-- Hide preloader when page loads -->
+  <script>
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        document.getElementById('preloader').style.opacity = '0';
+        setTimeout(function() {
+          document.getElementById('preloader').style.display = 'none';
+        }, 500); // Match this with the transition time
+      }, 1000); // Minimum display time (1 second)
+    });
+  </script>
+</body>
+Option 2: Enhanced JavaScript Version (Add to <head>)
+html
+<head>
+  <style>
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.5s ease;
+    }
+    
+    .bars {
+      width: 50.4px;
+      height: 67.2px;
+      --c: linear-gradient(#df1783 0 0);
+      background: var(--c) 0% 50%,
+                 var(--c) 50% 50%,
+                 var(--c) 100% 50%;
+      background-size: 10.1px 50%;
+      background-repeat: no-repeat;
+      animation: bars-animation 1s infinite linear alternate;
+    }
+    
+    @keyframes bars-animation {
+      20% { background-size: 10.1px 20%, 10.1px 50%, 10.1px 50%; }
+      40% { background-size: 10.1px 100%, 10.1px 20%, 10.1px 50%; }
+      60% { background-size: 10.1px 50%, 10.1px 100%, 10.1px 20%; }
+      80% { background-size: 10.1px 50%, 10.1px 50%, 10.1px 100%; }
+    }
+
+
+
+        
         :root {
             --primary-color: #df1783;
             --dark-bg: #1a1a1a;
@@ -516,6 +613,39 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Error loading protect.js:', e);
     }
 }(document, 'script'));
+
+
+
+
+      
+
+      
+   // Show preloader immediately
+    document.addEventListener('DOMContentLoaded', function() {
+      // Preloader will be visible by default
+      
+      // Hide when everything is ready
+      window.addEventListener('load', function() {
+        var preloader = document.getElementById('preloader');
+        var minDisplayTime = 2000; // 2 seconds minimum
+        var startTime = Date.now();
+        
+        // Calculate remaining time to meet minimum display
+        var elapsed = Date.now() - startTime;
+        var remaining = Math.max(0, minDisplayTime - elapsed);
+        
+        setTimeout(function() {
+          preloader.style.opacity = '0';
+          setTimeout(function() {
+            preloader.style.display = 'none';
+          }, 500);
+        }, remaining);
+      });
+    });
+
+
+
+      
 </script>
         
 
