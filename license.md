@@ -1,23 +1,20 @@
 VIBECODING STUDIO LICENSE (v2.0)
 
-Copyright (c) 2024 Html Lab. All rights reserved.
+# VibeCoding Studio License  
+*(Source-Available, Non-Commercial)*  
 
-1. GRANT OF RIGHTS
-   - You may view, modify, and run this code locally
-   - You may redistribute UNMODIFIED copies for non-commercial use
+## Permissions ✅  
+- View and modify code  
+- Self-host for **personal/educational** use  
+- Report issues and suggest improvements  
 
-2. RESTRICTIONS
-   - Commercial use requires written permission
-   - Reverse-engineering AI integrations is prohibited
-   - Hosting this as a competing SaaS is forbidden
+## Restrictions ❌  
+- **No** commercial deployment without our SaaS subscription  
+- **No** redistribution of modified versions  
+- **No** bypassing of AI authentication  
 
-3. SAAS REQUIREMENTS
-   - Production deployments must subscribe at:
-     https://vibecoding-studio.html-lab.net/pricing
+## Legal Terms  
+- Full terms: [Terms of Service](https://vibecoding-studio.html-lab.net/terms)  
+- Violations may result in account termination  
 
-4. LIABILITY
-   - No warranty provided
-   - We are not liable for any damages
-
-Full Terms: https://vibecoding-studio.html-lab.net/terms
-Contact: legal@html-lab.net
+*© 2024 VibeCoding Studio - All Rights Reserved*  
