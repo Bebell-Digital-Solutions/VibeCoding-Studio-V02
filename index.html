@@ -228,7 +228,7 @@
         
 
         .iframe-load-info {
-            padding: 20px;
+            padding: 40px;
             text-align: center;
             color: #aaa;
             font-size: 0.9em;
@@ -260,6 +260,24 @@
 
 
 
+
+#viewer {
+    background: white;
+    border: none;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Ensure content in the iframe is visible */
+#viewer body {
+    color: #333 !important;
+    font-family: Arial, sans-serif !important;
+    padding: 20px !important;
+}
+
+
+        
 
 
 
@@ -331,6 +349,8 @@
                     </button>
                 </div>
             </div>
+
+            
             <div class="panel-content">
                 <textarea id="editor" spellcheck="false">&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
@@ -355,7 +375,9 @@
         <div class="panel">
             <div class="panel-header">🔎 Live Preview</div>
             <div class="panel-content">
-                <iframe id="viewer" title="Live HTML Preview" sandbox="allow-scripts"></iframe>
+        
+                <iframe id="viewer" title="Live HTML Preview" sandbox="allow-same-origin allow-scripts"></iframe>
+            
             </div>
         </div>
     </div>
@@ -489,6 +511,8 @@ function setupEventListeners() {
             }
         }
 
+        
+
         function processUrl(url) {
             let fullUrl = url;
             if (!/^https?:\/\//i.test(url)) {
@@ -505,11 +529,15 @@ function setupEventListeners() {
             };
         }
 
+
+        
         function isDomainBlocked(hostname) {
             return BLOCKED_DOMAINS.some(domain => {
                 return hostname === domain || hostname.endsWith(`.${domain}`);
             });
         }
+
+        
 
         function loadIframe(url) {
             elements.browserFrame.onload = () => {
@@ -525,15 +553,42 @@ function setupEventListeners() {
             elements.browserFrame.src = url;
         }
 
+
+
+        
         // Editor Functions
         function updateViewer() {
-            try {
-                elements.viewer.srcdoc = elements.editor.value;
-            } catch (e) {
-                console.error('Viewer update error:', e);
-            }
-        }
+    try {
+        // Get the current editor content
+        const content = elements.editor.value;
+        
+        // Create a complete HTML document with the content
+        const fullHtml = `<!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="UTF-8">
+                <style>
+                    body { 
+                        background: white; 
+                        padding: 20px; 
+                        font-family: Arial, sans-serif;
+                        color: #333;
+                    }
+                </style>
+            </head>
+            <body>${content}</body>
+            </html>`;
+        
+        // Update the iframe
+        elements.viewer.srcdoc = fullHtml;
+    } catch (e) {
+        console.error('Viewer update error:', e);
+    }
+}
+        
 
+        
+        
         function handleTabIndent(e) {
             if (e.key === 'Tab') {
                 e.preventDefault();
@@ -543,6 +598,8 @@ function setupEventListeners() {
                 this.selectionStart = this.selectionEnd = start + 4;
             }
         }
+
+        
 
         function downloadHTML() {
             try {
@@ -563,6 +620,8 @@ function setupEventListeners() {
             }
         }
 
+        
+
         // Utility Functions
         function handleLLMSelect() {
             const selectedValue = this.value;
@@ -572,12 +631,16 @@ function setupEventListeners() {
             }
         }
 
+        
+
         function openInNewTab() {
             const url = elements.urlInput.value.trim();
             if (url) {
                 window.open(url, '_blank', 'noopener,noreferrer');
             }
         }
+
+        
 
         function showBrowserError(message) {
             if (elements.browserInfo) {
@@ -607,27 +670,40 @@ function setupEventListeners() {
             }
         }
 
-        function initViewer() {
-            elements.viewer.srcdoc = `<!DOCTYPE html>
-                <html>
-                <head>
-                    <meta charset="UTF-8">
-                    <title>Preview</title>
-                    <style>
-                        body { 
-                            background: white; 
-                            padding: 20px; 
-                            font-family: Arial, sans-serif;
-                        }
-                    </style>
-                </head>
-                <body>
-<h1>Welcome to VibeCoding Studio!</h1>
-<p>This is a sample HTML document. Edit me as you please!</p>
 
-                </body>
-                </html>`;
-        }
+        
+
+    function initViewer() {
+    const htmlContent = `<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Preview</title>
+            <style>
+                body { 
+                    background: white; 
+                    padding: 20px; 
+                    font-family: Arial, sans-serif;
+                    color: #333; /* Ensure text color is visible */
+                }
+                h1 { color: #df1783; }
+                p { color: #333; }
+            </style>
+        </head>
+        <body>
+            <h1>Welcome to VibeCoding Studio!</h1>
+            <p>This is a sample HTML document. Edit me as you please!</p>
+        </body>
+        </html>`;
+    
+    elements.viewer.srcdoc = htmlContent;
+}
+
+
+
+
+
+        
 
         function handlePreloader() {
             window.addEventListener('load', () => {
