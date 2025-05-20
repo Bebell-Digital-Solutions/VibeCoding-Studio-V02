@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -300,7 +300,7 @@
         <span class="brand-text">VibeCoding Studio</span>
     </div>
     <div id="auth-widget">
-        <a href="https://vibecoding-studio.html-lab.net/logout/" id="logout-link" style="color: white; text-decoration: none; font-weight: 500;">Log Out</a>
+        <a href="#" id="logout-link" style="color: white; text-decoration: none; font-weight: 500;">Log Out</a>
     </div>
 </div>
 
@@ -475,6 +475,19 @@ function setupEventListeners() {
     if (document.getElementById('logout-link')) {
         document.getElementById('logout-link').addEventListener('click', handleLogout);
     }
+
+
+// Add this at the start of your script:
+// Check for logout flag in URL
+if (new URLSearchParams(window.location.search).has('logout')) {
+    // Final cleanup
+    localStorage.clear();
+    // Remove the logout parameter from URL
+    history.replaceState(null, null, window.location.pathname);
+}
+
+
+    
     
     if (elements.editor) {
         let debounceTimer;
@@ -711,36 +724,19 @@ function setupEventListeners() {
 
 // Replace your current handleLogout() with this:
 function handleLogout(e) {
-    e.preventDefault();
+    e.preventDefault(); // Stop the default link behavior
     
-    // 1. Clear all storage
+    // Clear all local data (optional but recommended)
     localStorage.clear();
     sessionStorage.clear();
+    document.getElementById('editor').value = ''; // Clear editor content
     
-    // 2. Clear cookies (if any)
-    document.cookie.split(";").forEach(cookie => {
-        document.cookie = cookie.replace(/^ +/, "").replace(/=.*/, `=;expires=${new Date(0).toUTCString()};path=/`);
-    });
-
-    // 3. Force hard reset (cache-busting)
-    window.location.href = window.location.origin + '?logout=' + Date.now();
+    // Force redirect to your custom URL in the SAME tab
+    window.location.href = 'https://logout-page.html-lab.net'; // ← YOUR URL HERE
 }
 
-// Add this at the start of your script:
-// Check for logout flag in URL
-if (new URLSearchParams(window.location.search).has('logout')) {
-    // Final cleanup
-    localStorage.clear();
-    // Remove the logout parameter from URL
-    history.replaceState(null, null, window.location.pathname);
-}
+    
 
-
-
-
-        
-
-        
 
         function handlePreloader() {
             window.addEventListener('load', () => {
