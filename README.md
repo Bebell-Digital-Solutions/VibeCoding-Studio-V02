@@ -85,6 +85,11 @@ Yes! But you must sign our [CLA](https://yourwebsite.com/cla) first.
 
 ## ⚠️ **Important**: This repository contains only the interface code.  
 - Running the full product requires our SaaS backend  
-- Unauthorized AI integration is prohibited  
+- Unauthorized AI integration is prohibited
+
+###  Copyright (c) 2024 VibeCoding Studio by Html Lab 
+- Redistribution prohibited for commercial use  
+- AI integrations require explicit authorization  
+- See Terms at: [html-lab.net/terms](https://html-lab.net/terms)  
 
 <div align="left"> Made with ❤️ for first-time coders everywhere </div> 
