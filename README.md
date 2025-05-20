@@ -10,8 +10,8 @@
 </div>
 
 ## 📜 License
-
-The panel interface code is [source-available](LICENSE), while AI integrations require a [subscription](https://yourwebsite.com/pricing).
+- This project uses a [source-available license](LICENSE.md).  
+- AI features require a [subscription](https://yourwebsite.com/pricing).  
 
 ## 🚀 Features
 
@@ -21,6 +21,8 @@ The panel interface code is [source-available](LICENSE), while AI integrations r
 | **✏️ Live HTML Editor** | Real-time coding with syntax highlighting |
 | **👀 Instant Preview** | See changes as you type |
 | **💾 One-Click Export** | Download your HTML files instantly |
+
+---
 
 ## 🏁 Getting Started
 
@@ -36,7 +38,7 @@ The panel interface code is [source-available](LICENSE), while AI integrations r
 
 ✅ Click "Export" to download HTML when satisfied
 
-
+---
 ## Prerequisites
 
 - Modern web browser (Chrome, Firefox, Edge)
@@ -48,10 +50,12 @@ git clone https://github.com/yourusername/VibeCoding-Studio.git
 cd VibeCoding-Studio
 ```
 
-
+---
 ## 📸 Screenshots
 
 <div align="center"> <img src="https://via.placeholder.com/400x250/333/ffffff?text=Editor+View" width="45%"/> <img src="https://via.placeholder.com/400x250/333/ffffff?text=AI+Assistant" width="45%"/> </div>
+
+---
 
 ## 🌟 Why VibeCoding? 
 
@@ -59,6 +63,8 @@ cd VibeCoding-Studio
 ✅ Perfect for absolute beginners<br>
 ✅ Learn while you build<br>
 ✅ No coding experience needed<br>
+
+---
 
 ## 📜 Frequently Asked Legal Questions
 
@@ -79,13 +85,17 @@ cd VibeCoding-Studio
 - Legal action for commercial infringement  
 
 ### 5. Can I contribute code?  
-Yes! But you must sign our [CLA](https://yourwebsite.com/cla) first.  
+Yes! But you must sign our [CLA](https://html-lab.net/cla) first.  
 
-[View Full Terms →](https://yourwebsite.com/terms)  
+[View Full Terms →](https://html-lab.net/terms)  
+
+
+---
 
 ## ⚠️ **Important**: This repository contains only the interface code.  
 - Running the full product requires our SaaS backend  
 - Unauthorized AI integration is prohibited
+---
 
 ###  Copyright (c) 2024 VibeCoding Studio by Html Lab 
 - Redistribution prohibited for commercial use  
