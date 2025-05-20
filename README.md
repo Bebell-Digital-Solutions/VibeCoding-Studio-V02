@@ -1,4 +1,4 @@
-# VibeCoding Studio 
+# VibeCoding Studio V2.0
 
 <div align="left">
   <img src="https://bucket.mlcdn.com/a/3336/3336910/images/d9788d4d0dd04ee4c5f46d7173ab20bb5ca39fd3.png" alt="Banner" width="100%"/>
