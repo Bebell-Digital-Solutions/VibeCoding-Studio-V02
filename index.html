@@ -707,6 +707,31 @@ function setupEventListeners() {
 
 
 
+
+
+
+        
+
+function handleLogout(e) {
+    e.preventDefault();
+    
+    // Clear ALL client-side storage
+    localStorage.clear();
+    sessionStorage.clear();
+    
+    // Clear the editor content
+    document.getElementById('editor').value = '';
+    
+    // Force a hard refresh to reset everything
+    window.location.href = window.location.origin + '?logout=true'; // Adds a cache-buster
+    
+    // Optional: Redirect to login page if you have one
+    // window.location.href = 'login.html';
+}
+
+
+        
+
         
 
         function handlePreloader() {
@@ -740,6 +765,64 @@ function setupEventListeners() {
             console.error('Error loading protect.js:', e);
         }
     }(document, 'script'));
+
+
+
+
+// Check URL for logout parameter
+if (new URLSearchParams(window.location.search).has('logout')) {
+    localStorage.clear();
+    sessionStorage.clear();
+    window.history.replaceState({}, document.title, window.location.pathname); // Clean URL
+}
+
+
+
+
+        
+        function handleLogout(e) {
+    e.preventDefault();
+    
+    // Clear all possible storage
+    localStorage.clear();
+    sessionStorage.clear();
+    document.cookie = '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    
+    // Force cache clearance
+    const noCacheUrl = window.location.origin + '?nocache=' + Date.now();
+    
+    // Redirect with replacement to prevent back button issues
+    window.location.replace(noCacheUrl);
+}
+
+
+
+
+        
+        
+        function handleLogout(e) {
+    e.preventDefault();
+    
+    // Show logout confirmation
+    if (confirm('Really log out?')) {
+        document.body.innerHTML = `
+            <div style="text-align:center;padding:50px;">
+                <h1>Logged Out</h1>
+                <p><a href="${window.location.origin}">Login again</a></p>
+            </div>
+        `;
+        
+        // Clear storage
+        localStorage.clear();
+    }
+}
+
+
+        
+
+
+
+        
     </script>
 </body>
 </html>
