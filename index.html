@@ -642,25 +642,7 @@
         init();
     })();
 
-    // ProductDyno script with error handling
-    (function(d, t) {
-        try {
-            var hs = d.createElement(t),
-                s = d.getElementsByTagName(t)[0];
-            
-            hs.src = 'https://app.productdyno.com/assets/js/protect.js';
-            hs.setAttribute('data-auth-type', 'product');
-            hs.setAttribute('data-auth-type-id', '38000');
-            
-            hs.onerror = function() {
-                console.error('Failed to load protect.js');
-            };
-            
-            s.parentNode.insertBefore(hs, s);
-        } catch (e) {
-            console.error('Error loading protect.js:', e);
-        }
-    }(document, 'script'));
+
 
 
 
