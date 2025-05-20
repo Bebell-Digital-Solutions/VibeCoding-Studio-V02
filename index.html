@@ -619,64 +619,6 @@ if (new URLSearchParams(window.location.search).has('logout')) {
 
      
 
-function downloadHTML() {
-    try {
-        // 1. Get current editor content
-        const content = elements.editor.value;
-        
-        // 2. Prepare confetti injection
-        const confettiScript = `
-            <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-            <script>
-                // Trigger confetti on page load
-                window.addEventListener('load', () => {
-                    confetti({
-                        particleCount: 200,
-                        spread: 70,
-                        origin: { y: 0.6 },
-                        disableForReducedMotion: true
-                    });
-                    
-                    // Optional: Add confetti to all internal links
-                    document.querySelectorAll('a[href^="?"]').forEach(link => {
-                        link.addEventListener('click', () => {
-                            confetti({
-                                particleCount: 100,
-                                spread: 50,
-                                origin: { y: 0.3 }
-                            });
-                        });
-                    });
-                });
-            </script>`;
-        
-        // 3. Modify the content
-        const modifiedContent = content
-            // Add query parameter to all relative links
-            .replace(/<a href="([^"http])/g, '<a href="?from_vibecoding=true&$1')
-            // Inject confetti script before </body>
-            .replace(/<\/body>/i, confettiScript + '\n</body>');
-        
-        // 4. Create and trigger download
-        const blob = new Blob([modifiedContent], { type: 'text/html' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'vibecoding-document.html';
-        document.body.appendChild(a);
-        a.click();
-        
-        // 5. Cleanup
-        setTimeout(() => {
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }, 100);
-        
-    } catch (e) {
-        console.error('Download error:', e);
-        alert('Error creating download. Please check console for details.');
-    }
-}
 
 
 
