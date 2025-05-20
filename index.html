@@ -387,9 +387,7 @@
 
 
     
-    <script>
-
-
+<script>
     (function() {
         // DOM Elements
         const elements = {
@@ -405,10 +403,6 @@
             preloader: document.getElementById('preloader')
         };
 
-
-
-        
-
         // Constants
         const BLOCKED_DOMAINS = [
             'openai.com', 
@@ -416,13 +410,9 @@
             'google.com',
             'deepseek.com',
         ];
-
         
         const MIN_LOADER_TIME = 2000;
         let loaderStartTime = Date.now();
-
-
-        
 
         // Initialize
         function init() {
@@ -431,72 +421,26 @@
             handlePreloader();
         }
 
-
-
-function handleLogout(e) {
-    e.preventDefault();
-    
-    // Show loading state
-    document.getElementById('preloader').style.display = 'flex';
-    document.getElementById('preloader').style.opacity = '1';
-    
-    // Clear all client-side data
-    localStorage.clear();
-    sessionStorage.clear();
-    
-    // Clear sensitive editor content
-    document.getElementById('editor').value = '';
-    
-    // Redirect after delay
-    setTimeout(() => {
-        window.location.href = 'https://vibecoding.html-lab.net/logout/'; // or your login page
-    }, 800);
-    
-    return false;
-}
-
-
-
-
-        
+        // Simplified logout function
+        function handleLogout(e) {
+            e.preventDefault();
+            window.location.href = "https://html-lab.net/";
+        }
 
         // Event Listeners
-function setupEventListeners() {
-    if (elements.goButton) elements.goButton.addEventListener('click', navigateBrowser);
-    if (elements.urlInput) elements.urlInput.addEventListener('keypress', (e) => e.key === 'Enter' && navigateBrowser());
-    if (elements.llmSelector) elements.llmSelector.addEventListener('change', handleLLMSelect);
-    if (elements.openTabBtn) elements.openTabBtn.addEventListener('click', openInNewTab);
-    if (elements.downloadBtn) elements.downloadBtn.addEventListener('click', downloadHTML);
-    
-    // Add this line to handle logout
-    if (document.getElementById('logout-link')) {
-        document.getElementById('logout-link').addEventListener('click', handleLogout);
-    }
-
-
-// Add this at the start of your script:
-// Check for logout flag in URL
-if (new URLSearchParams(window.location.search).has('logout')) {
-    // Final cleanup
-    localStorage.clear();
-    // Remove the logout parameter from URL
-    history.replaceState(null, null, window.location.pathname);
-}
-
-
-    
-    
-    if (elements.editor) {
-        let debounceTimer;
-        elements.editor.addEventListener('input', () => {
-            clearTimeout(debounceTimer);
-            debounceTimer = setTimeout(updateViewer, 300);
-        });
-        elements.editor.addEventListener('keydown', handleTabIndent);
-    }
-}
-
-        
+        function setupEventListeners() {
+            if (elements.goButton) elements.goButton.addEventListener('click', navigateBrowser);
+            if (elements.urlInput) elements.urlInput.addEventListener('keypress', (e) => e.key === 'Enter' && navigateBrowser());
+            if (elements.llmSelector) elements.llmSelector.addEventListener('change', handleLLMSelect);
+            if (elements.openTabBtn) elements.openTabBtn.addEventListener('click', openInNewTab);
+            if (elements.downloadBtn) elements.downloadBtn.addEventListener('click', downloadHTML);
+            
+            // Add logout listener
+            const logoutLink = document.getElementById('logout-link');
+            if (logoutLink) {
+                logoutLink.addEventListener('click', handleLogout);
+            }
+        }
 
         // Browser Functions
         function navigateBrowser() {
@@ -525,8 +469,6 @@ if (new URLSearchParams(window.location.search).has('logout')) {
             }
         }
 
-        
-
         function processUrl(url) {
             let fullUrl = url;
             if (!/^https?:\/\//i.test(url)) {
@@ -542,16 +484,12 @@ if (new URLSearchParams(window.location.search).has('logout')) {
                 valid: true
             };
         }
-
-
         
         function isDomainBlocked(hostname) {
             return BLOCKED_DOMAINS.some(domain => {
                 return hostname === domain || hostname.endsWith(`.${domain}`);
             });
         }
-
-        
 
         function loadIframe(url) {
             elements.browserFrame.onload = () => {
@@ -567,41 +505,31 @@ if (new URLSearchParams(window.location.search).has('logout')) {
             elements.browserFrame.src = url;
         }
 
-
-
-        
         // Editor Functions
         function updateViewer() {
-    try {
-        // Get the current editor content
-        const content = elements.editor.value;
-        
-        // Create a complete HTML document with the content
-        const fullHtml = `<!DOCTYPE html>
-            <html>
-            <head>
-                <meta charset="UTF-8">
-                <style>
-                    body { 
-                        background: white; 
-                        padding: 20px; 
-                        font-family: Arial, sans-serif;
-                        color: #333;
-                    }
-                </style>
-            </head>
-            <body>${content}</body>
-            </html>`;
-        
-        // Update the iframe
-        elements.viewer.srcdoc = fullHtml;
-    } catch (e) {
-        console.error('Viewer update error:', e);
-    }
-}
-        
-
-        
+            try {
+                const content = elements.editor.value;
+                const fullHtml = `<!DOCTYPE html>
+                    <html>
+                    <head>
+                        <meta charset="UTF-8">
+                        <style>
+                            body { 
+                                background: white; 
+                                padding: 20px; 
+                                font-family: Arial, sans-serif;
+                                color: #333;
+                            }
+                        </style>
+                    </head>
+                    <body>${content}</body>
+                    </html>`;
+                
+                elements.viewer.srcdoc = fullHtml;
+            } catch (e) {
+                console.error('Viewer update error:', e);
+            }
+        }
         
         function handleTabIndent(e) {
             if (e.key === 'Tab') {
@@ -612,8 +540,6 @@ if (new URLSearchParams(window.location.search).has('logout')) {
                 this.selectionStart = this.selectionEnd = start + 4;
             }
         }
-
-        
 
         function downloadHTML() {
             try {
@@ -634,8 +560,6 @@ if (new URLSearchParams(window.location.search).has('logout')) {
             }
         }
 
-        
-
         // Utility Functions
         function handleLLMSelect() {
             const selectedValue = this.value;
@@ -645,16 +569,12 @@ if (new URLSearchParams(window.location.search).has('logout')) {
             }
         }
 
-        
-
         function openInNewTab() {
             const url = elements.urlInput.value.trim();
             if (url) {
                 window.open(url, '_blank', 'noopener,noreferrer');
             }
         }
-
-        
 
         function showBrowserError(message) {
             if (elements.browserInfo) {
@@ -684,56 +604,31 @@ if (new URLSearchParams(window.location.search).has('logout')) {
             }
         }
 
-
-        
-
-    function initViewer() {
-    const htmlContent = `<!DOCTYPE html>
-        <html>
-        <head>
-            <meta charset="UTF-8">
-            <title>Preview</title>
-            <style>
-                body { 
-                    background: white; 
-                    padding: 20px; 
-                    font-family: Arial, sans-serif;
-                    color: #333; /* Ensure text color is visible */
-                }
-                h1 { color: #df1783; }
-                p { color: #333; }
-            </style>
-        </head>
-        <body>
-            <h1>Welcome to VibeCoding Studio!</h1>
-            <p>This is a sample HTML document. Edit me as you please!</p>
-        </body>
-        </html>`;
-    
-    elements.viewer.srcdoc = htmlContent;
-}
-
-
-
-
-
-
-
-// Replace your current handleLogout() with this:
-function handleLogout(e) {
-    e.preventDefault(); // Stop the default link behavior
-    
-    // Clear all local data (optional but recommended)
-    localStorage.clear();
-    sessionStorage.clear();
-    document.getElementById('editor').value = ''; // Clear editor content
-    
-    // Force redirect to your custom URL in the SAME tab
-    window.location.href = 'https://vibecoding.html-lab.net/logout/'; // ← YOUR URL HERE
-}
-
-    
-
+        function initViewer() {
+            const htmlContent = `<!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <title>Preview</title>
+                    <style>
+                        body { 
+                            background: white; 
+                            padding: 20px; 
+                            font-family: Arial, sans-serif;
+                            color: #333;
+                        }
+                        h1 { color: #df1783; }
+                        p { color: #333; }
+                    </style>
+                </head>
+                <body>
+                    <h1>Welcome to VibeCoding Studio!</h1>
+                    <p>This is a sample HTML document. Edit me as you please!</p>
+                </body>
+                </html>`;
+            
+            elements.viewer.srcdoc = htmlContent;
+        }
 
         function handlePreloader() {
             window.addEventListener('load', () => {
@@ -747,10 +642,6 @@ function handleLogout(e) {
         init();
     })();
 
-
-
-
-        
     // ProductDyno script with error handling
     (function(d, t) {
         try {
@@ -773,79 +664,11 @@ function handleLogout(e) {
 
 
 
-
-// Check URL for logout parameter
-if (new URLSearchParams(window.location.search).has('logout')) {
-    localStorage.clear();
-    sessionStorage.clear();
-    window.history.replaceState({}, document.title, window.location.pathname); // Clean URL
-}
+</script>
 
 
 
 
-
-
-
-     function downloadHTML() {
-    try {
-        // 1. Get current editor content
-        const content = elements.editor.value;
-        
-        // 2. Add confetti script to the exported file
-        const confettiScript = `
-            <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-            <script>
-                document.addEventListener('DOMContentLoaded', () => {
-                    confetti({
-                        particleCount: 400,
-                        spread: 200,
-                        origin: { x: 0.5, y: 0.5 },
-                        disableForReducedMotion: true
-                    });
-                });
-            </script>`;
-        
-        // 3. Insert confetti script before </body>
-        const modifiedContent = content.replace(
-            /<\/body>/i, 
-            confettiScript + '\n</body>'
-        );
-        
-        // 4. Create and trigger download
-        const blob = new Blob([modifiedContent], { type: 'text/html' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'vibecoding-document.html';
-        document.body.appendChild(a);
-        a.click();
-        
-        // 5. Cleanup
-        setTimeout(() => {
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }, 100);
-        
-    } catch (e) {
-        console.error('Download error:', e);
-        alert('Error creating download. Please check console for details.');
-    }
-}
-
-
-
-
-
-
-
-
-
-     
-
-
-
-        
-    </script>
+ 
 </body>
 </html>
