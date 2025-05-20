@@ -613,16 +613,26 @@ if (new URLSearchParams(window.location.search).has('logout')) {
             }
         }
 
+        
 
-
-
-
-     
-
-
-
-
-                                               
+        function downloadHTML() {
+            try {
+                const blob = new Blob([elements.editor.value], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'vibecoding-document.html';
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 100);
+            } catch (e) {
+                console.error('Download error:', e);
+                alert('Error creating download. Please check console for details.');
+            }
+        }
 
         
 
@@ -772,6 +782,56 @@ if (new URLSearchParams(window.location.search).has('logout')) {
 }
 
 
+
+
+
+
+
+     function downloadHTML() {
+    try {
+        // 1. Get current editor content
+        const content = elements.editor.value;
+        
+        // 2. Add confetti script to the exported file
+        const confettiScript = `
+            <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    confetti({
+                        particleCount: 400,
+                        spread: 200,
+                        origin: { x: 0.5, y: 0.5 },
+                        disableForReducedMotion: true
+                    });
+                });
+            </script>`;
+        
+        // 3. Insert confetti script before </body>
+        const modifiedContent = content.replace(
+            /<\/body>/i, 
+            confettiScript + '\n</body>'
+        );
+        
+        // 4. Create and trigger download
+        const blob = new Blob([modifiedContent], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'vibecoding-document.html';
+        document.body.appendChild(a);
+        a.click();
+        
+        // 5. Cleanup
+        setTimeout(() => {
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }, 100);
+        
+    } catch (e) {
+        console.error('Download error:', e);
+        alert('Error creating download. Please check console for details.');
+    }
+}
 
 
 
