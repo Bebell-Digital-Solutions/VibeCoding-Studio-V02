@@ -41,6 +41,8 @@
             80% { background-size: 10.1px 50%, 10.1px 50%, 10.1px 100%; }
         }
 
+     
+
         :root {
             --primary-color: #df1783;
             --dark-bg: #1a1a1a;
@@ -512,18 +514,16 @@
             });
         }
 
+
+     
+
        function loadIframe(url) {
-    showLoader();
-    
-    elements.browserFrame.onload = () => {
-        hideLoader();
-        hideBrowserError();
-    };
-    
     elements.browserFrame.onerror = () => {
-        hideLoader();
         showBrowserError("Failed to load URL");
     };
+
+   // Optional: You might want to keep this to hide any previous errors
+    elements.browserFrame.onload = hideBrowserError;
     
     elements.browserFrame.src = url;
 }
