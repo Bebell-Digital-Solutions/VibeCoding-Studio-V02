@@ -414,12 +414,23 @@
         const MIN_LOADER_TIME = 2000;
         let loaderStartTime = Date.now();
 
+
+
+     
         // Initialize
         function init() {
             setupEventListeners();
             initViewer();
             handlePreloader();
         }
+
+
+    // Add this line to listen for editor changes
+    elements.editor.addEventListener('input', updateViewer);
+}
+
+
+     
 
         // Simplified logout function
         function handleLogout(e) {
@@ -509,27 +520,41 @@
         function updateViewer() {
             try {
                 const content = elements.editor.value;
-                const fullHtml = `<!DOCTYPE html>
-                    <html>
-                    <head>
-                        <meta charset="UTF-8">
-                        <style>
-                            body { 
-                                background: white; 
-                                padding: 20px; 
-                                font-family: Arial, sans-serif;
-                                color: #333;
-                            }
-                        </style>
-                    </head>
-                    <body>${content}</body>
-                    </html>`;
-                
-                elements.viewer.srcdoc = fullHtml;
-            } catch (e) {
-                console.error('Viewer update error:', e);
-            }
+
+             
+                 // If the content already has full HTML structure, use it as-is
+        if (content.includes('<!DOCTYPE html>') || 
+            content.includes('<html>') || 
+            content.includes('<head>')) {
+            elements.viewer.srcdoc = content;
+        } 
+        // Otherwise wrap it in a basic HTML structure
+        else {
+            const fullHtml = `<!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <style>
+                        body { 
+                            background: white; 
+                            padding: 20px; 
+                            font-family: Arial, sans-serif;
+                            color: #333;
+                        }
+                    </style>
+                </head>
+                <body>${content}</body>
+                </html>`;
+            
+            elements.viewer.srcdoc = fullHtml;
         }
+    } catch (e) {
+        console.error('Viewer update error:', e);
+    }
+}
+
+
+ 
         
         function handleTabIndent(e) {
             if (e.key === 'Tab') {
@@ -628,7 +653,11 @@
                 </html>`;
             
             elements.viewer.srcdoc = htmlContent;
+            updateViewer();
         }
+
+
+ 
 
         function handlePreloader() {
             window.addEventListener('load', () => {
