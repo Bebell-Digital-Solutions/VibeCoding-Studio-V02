@@ -329,7 +329,7 @@
                 <button id="go-button">Go</button>
             </div>
             <div class="panel-content">
-                <iframe id="browser" src="about:blank" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+                <iframe id="browser" onerror="handleFrameError(this)" src="about:blank" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
                 <div id="browser-info" class="iframe-load-info" style="display: none;">
                     <p class="iframe-error">Many websites prevent themselves from being loaded in iframes for security reasons.</p>
                     <p>If a site doesn't load, try opening it in a new tab.</p>
@@ -379,7 +379,7 @@
             <div class="panel-header">🔎 Live Preview</div>
             <div class="panel-content">
         
-                <iframe id="viewer" title="Live HTML Preview" sandbox="allow-same-origin allow-scripts"></iframe>
+                <iframe id="viewer" onerror="this.src='about:blank'" title="Live HTML Preview" sandbox="allow-same-origin allow-scripts"></iframe>
             
             </div>
         </div>
@@ -625,15 +625,24 @@
         // Modify the showLoader and hideLoader functions:
 function showLoader() {
     loaderStartTime = Date.now();
+ if (isLoading) return;
+    isLoading = true;
     if (elements.preloader) {
         elements.preloader.style.display = 'flex';
         elements.preloader.style.opacity = '1'; // Ensure it's visible
     }
 }
 
+
+
+     
 function hideLoader() {
     const elapsed = Date.now() - loaderStartTime;
     const remaining = Math.max(0, MIN_LOADER_TIME - elapsed);
+
+ if (!isLoading) return;
+     isLoading = false;
+}
     
     setTimeout(() => {
         if (elements.preloader) {
