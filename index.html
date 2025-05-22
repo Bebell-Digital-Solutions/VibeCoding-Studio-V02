@@ -19,7 +19,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.3s ease;
         }
         
         .bars {
@@ -418,15 +418,25 @@
 
      
         // Initialize
-        function init() {
-            setupEventListeners();
-            initViewer();
-            handlePreloader();
-        }
-
-
-    // Add this line to listen for editor changes
-    elements.editor.addEventListener('input', updateViewer);
+       function init() {
+    setupEventListeners();
+    initViewer();
+    
+    // Start with loader hidden
+    if (elements.preloader) {
+        elements.preloader.style.display = 'none';
+        elements.preloader.style.opacity = '0';
+    }
+    
+    // Set up editor listener with debouncing for better performance
+    let updateTimeout;
+    elements.editor.addEventListener('input', () => {
+        clearTimeout(updateTimeout);
+        updateTimeout = setTimeout(updateViewer, 300);
+    });
+    
+    // Initial update
+    updateViewer();
 }
 
 
@@ -502,56 +512,51 @@
             });
         }
 
-        function loadIframe(url) {
-            elements.browserFrame.onload = () => {
-                setTimeout(hideLoader, Math.max(0, MIN_LOADER_TIME - (Date.now() - loaderStartTime)));
-                hideBrowserError();
-            };
-            
-            elements.browserFrame.onerror = () => {
-                showBrowserError("Failed to load URL");
-                hideLoader();
-            };
-            
-            elements.browserFrame.src = url;
-        }
+       function loadIframe(url) {
+    showLoader();
+    
+    elements.browserFrame.onload = () => {
+        hideLoader();
+        hideBrowserError();
+    };
+    
+    elements.browserFrame.onerror = () => {
+        hideLoader();
+        showBrowserError("Failed to load URL");
+    };
+    
+    elements.browserFrame.src = url;
+}
+
+
+
+ 
 
         // Editor Functions
         function updateViewer() {
+
+         // Temporarily disable loader interference
+    const wasLoaderVisible = elements.preloader.style.display === 'flex';
+
+         
             try {
                 const content = elements.editor.value;
 
              
-                 // If the content already has full HTML structure, use it as-is
-        if (content.includes('<!DOCTYPE html>') || 
-            content.includes('<html>') || 
-            content.includes('<head>')) {
-            elements.viewer.srcdoc = content;
-        } 
-        // Otherwise wrap it in a basic HTML structure
-        else {
-            const fullHtml = `<!DOCTYPE html>
-                <html>
-                <head>
-                    <meta charset="UTF-8">
-                    <style>
-                        body { 
-                            background: white; 
-                            padding: 20px; 
-                            font-family: Arial, sans-serif;
-                            color: #333;
-                        }
-                    </style>
-                </head>
-                <body>${content}</body>
-                </html>`;
-            
-            elements.viewer.srcdoc = fullHtml;
-        }
+// For the preview iframe, we always want immediate updates
+        elements.viewer.srcdoc = content.includes('<!DOCTYPE html>') ? content : 
+            `<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body>${content}</body></html>`;
+        
     } catch (e) {
         console.error('Viewer update error:', e);
+    } finally {
+        // Restore loader state if it was visible
+        if (wasLoaderVisible) {
+            elements.preloader.style.display = 'flex';
+            elements.preloader.style.opacity = '1';
+        }
     }
-}
+        }
 
 
  
@@ -615,19 +620,34 @@
             if (elements.browserInfo) elements.browserInfo.style.display = 'none';
         }
 
-        function showLoader() {
-            loaderStartTime = Date.now();
-            if (elements.preloader) elements.preloader.style.display = 'flex';
-        }
+ 
 
-        function hideLoader() {
-            if (elements.preloader) {
-                elements.preloader.style.opacity = '0';
-                setTimeout(() => {
-                    elements.preloader.style.display = 'none';
-                }, 500);
-            }
+        // Modify the showLoader and hideLoader functions:
+function showLoader() {
+    loaderStartTime = Date.now();
+    if (elements.preloader) {
+        elements.preloader.style.display = 'flex';
+        elements.preloader.style.opacity = '1'; // Ensure it's visible
+    }
+}
+
+function hideLoader() {
+    const elapsed = Date.now() - loaderStartTime;
+    const remaining = Math.max(0, MIN_LOADER_TIME - elapsed);
+    
+    setTimeout(() => {
+        if (elements.preloader) {
+            elements.preloader.style.opacity = '0';
+            setTimeout(() => {
+                elements.preloader.style.display = 'none';
+            }, 300); // Match this with your CSS transition time
         }
+    }, remaining);
+}
+
+
+
+ 
 
         function initViewer() {
             const htmlContent = `<!DOCTYPE html>
