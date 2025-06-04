@@ -394,6 +394,10 @@
 &lt;/html&gt;</textarea>
             </div>
         </div>
+
+
+	
+	
         
         <div class="panel">
             <div class="panel-header">🔎 Live Preview</div>
@@ -429,7 +433,6 @@
         // Constants
         const BLOCKED_DOMAINS = [
             'openai.com', 
-            '',
             'google.com',
             'deepseek.com',
         ];
@@ -522,6 +525,9 @@ function handleFrameError(frame) {
             }
         }
 
+
+	    
+
         function processUrl(url) {
             let fullUrl = url;
             if (!/^https?:\/\//i.test(url)) {
@@ -537,12 +543,18 @@ function handleFrameError(frame) {
                 valid: true
             };
         }
+
+
+	    
         
         function isDomainBlocked(hostname) {
             return BLOCKED_DOMAINS.some(domain => {
                 return hostname === domain || hostname.endsWith(`.${domain}`);
             });
         }
+
+
+	    
 
         function loadIframe(url) {
             elements.browserFrame.onerror = () => {
@@ -554,6 +566,9 @@ function handleFrameError(frame) {
             elements.browserFrame.src = url;
         }
 
+
+	    
+
         // Editor Functions
         function updateViewer() {
             try {
@@ -564,7 +579,10 @@ function handleFrameError(frame) {
                 console.error('Viewer update error:', e);
             }
         }
-        
+
+
+
+	    
         function handleTabIndent(e) {
             if (e.key === 'Tab') {
                 e.preventDefault();
@@ -575,6 +593,10 @@ function handleFrameError(frame) {
             }
         }
 
+
+
+
+	    
         function downloadHTML() {
             try {
                 const blob = new Blob([elements.editor.value], { type: 'text/html' });
@@ -596,6 +618,8 @@ function handleFrameError(frame) {
 	    
 	    
 
+
+	    
         // Utility Functions
         function handleLLMSelect() {
             const selectedValue = this.value;
@@ -612,6 +636,9 @@ function handleFrameError(frame) {
             }
         }
 
+
+	    
+
         function showBrowserError(message) {
             if (elements.browserInfo) {
                 if (message) {
@@ -622,10 +649,19 @@ function handleFrameError(frame) {
             }
         }
 
+
+
+
+	    
         function hideBrowserError() {
             if (elements.browserInfo) elements.browserInfo.style.display = 'none';
         }
 
+
+
+
+	    
+	    
         function initViewer() {
             const htmlContent = `<!DOCTYPE html>
                 <html>
