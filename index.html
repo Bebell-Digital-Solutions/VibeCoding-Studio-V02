@@ -408,10 +408,18 @@
             'deepseek.com',
         ];
 
+
+
+	    
+
         // Initialize
         function init() {
             setupEventListeners();
             initViewer();
+
+
+
+		
             
             // Set up editor listener with debouncing for better performance
             let updateTimeout;
@@ -419,16 +427,30 @@
                 clearTimeout(updateTimeout);
                 updateTimeout = setTimeout(updateViewer, 300);
             });
+
+
+
+		
             
             // Initial update
             updateViewer();
         }
+
+
+
+	    
 
         // Simplified logout function
         function handleLogout(e) {
             e.preventDefault();
             window.location.href = "https://html-lab.net/";
         }
+
+
+
+
+
+	    
 
         // Event Listeners
         function setupEventListeners() {
