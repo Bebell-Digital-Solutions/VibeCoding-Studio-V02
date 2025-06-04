@@ -6,10 +6,7 @@
     <title>3-Panel Interface - VibeCoding Studio</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-	
-	
-	<style>
+    <style>
 
 
         :root {
@@ -70,38 +67,22 @@
             color: white;
         }
 
-
-
-
-	    
         .container {
-    display: flex;
-    height: calc(100vh - 60px); /* Updated to match top-bar height */
-}
-
-.panel {
-    flex: 1;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    border-right: 1px solid var(--border-color);
-    background: var(--panel-bg);
-}  
+            display: flex;
+            height: calc(100vh - 50px);
+        }
         
-
-
-
-	    
+        .panel {
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--border-color);
+            background: var(--panel-bg);
+        }
         .panel:last-child {
             border-right: none;
         }
-
-
-
-
-
-		
-	    
         
         .panel-header {
             display: flex;
@@ -159,9 +140,6 @@
             overflow: auto;
             position: relative;
         }
-
-
-		
         
         iframe {
             background: white;
@@ -286,6 +264,11 @@
 }
 
 
+
+
+
+
+        
     </style>
 </head>
 <body>
@@ -306,7 +289,8 @@
 
     
     
-
+    <div class="container">
+        <div class="panel">
             <div class="panel-header">
                 <span>🤖 Assistant Model:</span>
                 <div class="panel-actions">
@@ -322,22 +306,18 @@
                         <option value="https://llamacoder.together.ai/">🤖 LlamaCoder</option>
                         <option value="https://html-lab.net/coding-tools">🛠️ Coding Tools</option>
                         <option value="https://webcode.tools/">🛠️ Webcode Tools</option>
-                        <option value="icons.html">🛠️ Icons Library</option>
-			<option value="fonts.html">🛠️ Fonts Library</option> 
+                        <option value="https://bebell-digital-solutions.github.io/directorio-iconos/">🛠️ Icons Library</option>
+			<option value="https://bebell-digital-solutions.github.io/directorio-fonts/">🛠️ Fonts Library</option> 
 			<option value="https://imageslidermaker.com/v2/">🛠️ Image Slider Creator</option>                     	    
-                        <option value="https://imageslidermaker.com/">🛠️ Components Gallery</option>                     
+                        <option value="https://imageslidermaker.com/v2/">🛠️ Components Gallery</option>                     
                         <option value="https://10015.io/tools/css-loader-generator/">🛠️ Css Loaders</option>
                         <option value="https://drive.google.com/">🗃️ Google Drive</option>
                         <option value="https://www.playbook.com/sign-in/">🗃️ PlayBook Drive</option>
                         <option value="https://chatterbot.support/asistentes">💬 AI Assistants</option> 
                     </select>
                 </div>
-
-
-
-
-
-		
+		    
+            </div>
             <div class="url-bar">
                 <input type="text" id="url-input" placeholder="Enter URL (e.g., https://example.com)">
                 <button id="go-button">Go</button>
@@ -353,9 +333,6 @@
                 </div>
             </div>
         </div>
-
-
-	
         
         <div class="panel">
             <div class="panel-header">
@@ -370,9 +347,6 @@
                 </div>
             </div>
 
-
-
-		
             
             <div class="panel-content">
                 <textarea id="editor" spellcheck="false">&lt;!DOCTYPE html&gt;
@@ -394,10 +368,6 @@
 &lt;/html&gt;</textarea>
             </div>
         </div>
-
-
-	
-	
         
         <div class="panel">
             <div class="panel-header">🔎 Live Preview</div>
@@ -433,6 +403,7 @@
         // Constants
         const BLOCKED_DOMAINS = [
             'openai.com', 
+            '',
             'google.com',
             'deepseek.com',
         ];
@@ -450,13 +421,12 @@
 
 		
             
-// Replace the current editor listener with:
-let updateTimeout;
-elements.editor.addEventListener('input', () => {
-    clearTimeout(updateTimeout);
-    updateTimeout = setTimeout(updateViewer, 300);
-});
-elements.editor.addEventListener('keydown', handleTabIndent);
+            // Set up editor listener with debouncing for better performance
+            let updateTimeout;
+            elements.editor.addEventListener('input', () => {
+                clearTimeout(updateTimeout);
+                updateTimeout = setTimeout(updateViewer, 300);
+            });
 
 
 
@@ -477,10 +447,7 @@ elements.editor.addEventListener('keydown', handleTabIndent);
         }
 
 
-function handleFrameError(frame) {
-    showBrowserError("Failed to load content");
-    frame.src = 'about:blank';
-}
+
 
 
 	    
@@ -525,9 +492,6 @@ function handleFrameError(frame) {
             }
         }
 
-
-	    
-
         function processUrl(url) {
             let fullUrl = url;
             if (!/^https?:\/\//i.test(url)) {
@@ -543,18 +507,12 @@ function handleFrameError(frame) {
                 valid: true
             };
         }
-
-
-	    
         
         function isDomainBlocked(hostname) {
             return BLOCKED_DOMAINS.some(domain => {
                 return hostname === domain || hostname.endsWith(`.${domain}`);
             });
         }
-
-
-	    
 
         function loadIframe(url) {
             elements.browserFrame.onerror = () => {
@@ -566,9 +524,6 @@ function handleFrameError(frame) {
             elements.browserFrame.src = url;
         }
 
-
-	    
-
         // Editor Functions
         function updateViewer() {
             try {
@@ -579,10 +534,7 @@ function handleFrameError(frame) {
                 console.error('Viewer update error:', e);
             }
         }
-
-
-
-	    
+        
         function handleTabIndent(e) {
             if (e.key === 'Tab') {
                 e.preventDefault();
@@ -593,10 +545,6 @@ function handleFrameError(frame) {
             }
         }
 
-
-
-
-	    
         function downloadHTML() {
             try {
                 const blob = new Blob([elements.editor.value], { type: 'text/html' });
@@ -615,11 +563,7 @@ function handleFrameError(frame) {
                 alert('Error creating download. Please check console for details.');
             }
         }
-	    
-	    
 
-
-	    
         // Utility Functions
         function handleLLMSelect() {
             const selectedValue = this.value;
@@ -636,9 +580,6 @@ function handleFrameError(frame) {
             }
         }
 
-
-	    
-
         function showBrowserError(message) {
             if (elements.browserInfo) {
                 if (message) {
@@ -649,19 +590,10 @@ function handleFrameError(frame) {
             }
         }
 
-
-
-
-	    
         function hideBrowserError() {
             if (elements.browserInfo) elements.browserInfo.style.display = 'none';
         }
 
-
-
-
-	    
-	    
         function initViewer() {
             const htmlContent = `<!DOCTYPE html>
                 <html>
@@ -692,22 +624,12 @@ function handleFrameError(frame) {
         // Initialize the application
         init();
     })();
-
-
-document.addEventListener('DOMContentLoaded', function() {
-        const currentPage = location.pathname.split('/').pop();
-        const links = document.querySelectorAll('nav a');
-        
-        links.forEach(link => {
-            if (link.getAttribute('href') === currentPage) {
-                link.classList.add('active');
-            }
-        });
-    });
-
-
-
 </script>
 
+
+ 
+
+
+ 
 </body>
 </html>
