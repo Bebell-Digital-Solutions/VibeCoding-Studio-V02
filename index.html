@@ -77,7 +77,6 @@
         .container {
     display: flex;
     height: calc(100vh - 60px); /* Updated to match top-bar height */
-    min-height: 0; /* New addition */
 }
 
 .panel {
@@ -87,7 +86,6 @@
     flex-direction: column;
     border-right: 1px solid var(--border-color);
     background: var(--panel-bg);
-    min-height: 0; /* New addition */
 }  
         
 
@@ -160,8 +158,10 @@
             flex: 1;
             overflow: auto;
             position: relative;
-	    min-height: 0;
         }
+
+
+		
         
         iframe {
             background: white;
