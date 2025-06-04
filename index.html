@@ -80,9 +80,13 @@
             border-right: 1px solid var(--border-color);
             background: var(--panel-bg);
         }
+
+	    
         .panel:last-child {
             border-right: none;
         }
+
+	    
         
         .panel-header {
             display: flex;
@@ -94,12 +98,16 @@
             user-select: none;
             flex-shrink: 0;
         }
+
+	    
         
         .panel-actions {
             display: flex;
             gap: 8px;
         }
-        
+
+
+	    
         .panel-action-btn, #llm-selector, #go-button {
             background: var(--input-bg);
             color: var(--text-light);
@@ -114,6 +122,8 @@
             font-family: 'Fira Code', monospace;
         }
 
+
+	    
         
         .panel-action-btn:hover, #llm-selector:hover, #go-button:hover {
             background-color: #454545;
@@ -140,7 +150,10 @@
             overflow: auto;
             position: relative;
         }
-        
+
+
+
+	    
         iframe {
             background: white;
             border: none;
@@ -159,7 +172,9 @@
             flex-shrink: 0;
         }
 
-        
+
+
+	    
         
         #url-input {
             flex: 1;
@@ -306,8 +321,8 @@
                         <option value="https://llamacoder.together.ai/">🤖 LlamaCoder</option>
                         <option value="https://html-lab.net/coding-tools">🛠️ Coding Tools</option>
                         <option value="https://webcode.tools/">🛠️ Webcode Tools</option>
-                        <option value="https://bebell-digital-solutions.github.io/directorio-iconos/">🛠️ Icons Library</option>
-			<option value="https://bebell-digital-solutions.github.io/directorio-fonts/">🛠️ Fonts Library</option> 
+                        <option value="https://bebell-digital-solutions.github.io/VibeCoding-Studio-V02/icons">🛠️ Icons Library</option>
+			<option value="https://bebell-digital-solutions.github.io/VibeCoding-Studio-V02/fonts">🛠️ Fonts Library</option> 
 			<option value="https://imageslidermaker.com/v2/">🛠️ Image Slider Creator</option>                     	    
                         <option value="https://imageslidermaker.com/v2/">🛠️ Components Gallery</option>                     
                         <option value="https://10015.io/tools/css-loader-generator/">🛠️ Css Loaders</option>
@@ -316,6 +331,10 @@
                         <option value="https://chatterbot.support/asistentes">💬 AI Assistants</option> 
                     </select>
                 </div>
+
+
+
+		    
 		    
             </div>
             <div class="url-bar">
@@ -400,10 +419,13 @@
             openTabBtn: document.getElementById('open-tab-btn')
         };
 
+
+
+	    
+
         // Constants
         const BLOCKED_DOMAINS = [
             'openai.com', 
-            '',
             'google.com',
             'deepseek.com',
         ];
@@ -459,13 +481,19 @@
             if (elements.llmSelector) elements.llmSelector.addEventListener('change', handleLLMSelect);
             if (elements.openTabBtn) elements.openTabBtn.addEventListener('click', openInNewTab);
             if (elements.downloadBtn) elements.downloadBtn.addEventListener('click', downloadHTML);
-            
+
+
+
+		
             // Add logout listener
             const logoutLink = document.getElementById('logout-link');
             if (logoutLink) {
                 logoutLink.addEventListener('click', handleLogout);
             }
         }
+
+
+	    
 
         // Browser Functions
         function navigateBrowser() {
@@ -492,6 +520,10 @@
             }
         }
 
+
+
+	    
+
         function processUrl(url) {
             let fullUrl = url;
             if (!/^https?:\/\//i.test(url)) {
@@ -507,12 +539,19 @@
                 valid: true
             };
         }
-        
+
+
+
+
+	    
         function isDomainBlocked(hostname) {
             return BLOCKED_DOMAINS.some(domain => {
                 return hostname === domain || hostname.endsWith(`.${domain}`);
             });
         }
+
+
+	    
 
         function loadIframe(url) {
             elements.browserFrame.onerror = () => {
@@ -524,6 +563,10 @@
             elements.browserFrame.src = url;
         }
 
+
+
+	    
+
         // Editor Functions
         function updateViewer() {
             try {
@@ -534,6 +577,9 @@
                 console.error('Viewer update error:', e);
             }
         }
+
+
+	    
         
         function handleTabIndent(e) {
             if (e.key === 'Tab') {
@@ -545,6 +591,10 @@
             }
         }
 
+
+
+
+	    
         function downloadHTML() {
             try {
                 const blob = new Blob([elements.editor.value], { type: 'text/html' });
@@ -564,6 +614,10 @@
             }
         }
 
+
+
+
+	    
         // Utility Functions
         function handleLLMSelect() {
             const selectedValue = this.value;
