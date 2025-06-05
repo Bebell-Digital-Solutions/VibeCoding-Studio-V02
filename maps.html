@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Icon Resources</title>
+
+
+  
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+
+
+      
+        .banner {
+            background: linear-gradient(135deg, #df1783, #a0196a);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+      
+        
+        .banner h1 {
+            margin: 0;
+            font-size: 2.2em;
+        }
+
+      
+        
+        .banner p {
+            margin: 10px 0 0;
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+
+      
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+
+
+      
+        blockquote {
+            background-color: #f0f4f8;
+            border-left: 4px solid #df1783;
+            padding: 15px;
+            margin: 20px 0;
+            color: #555;
+            border-radius: 0 8px 8px 0;
+        }
+
+
+/* Add these new styles */
+        .filter-controls {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f0f4f8;
+            border-radius: 8px;
+        }
+
+      
+
+      
+        .filter-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+      
+        .filter-tag {
+            padding: 5px 12px;
+            background: #e0e6ed;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.2s;
+        }
+
+      
+        .filter-tag:hover, .filter-tag.active {
+            background: #df1783;
+            color: white;
+        }
+
+      
+        .resource-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 8px;
+        }
+      
+        .resource-tag {
+            padding: 3px 8px;
+            background: #e0e6ed;
+            border-radius: 12px;
+            font-size: 0.8em;
+            color: #4a5568;
+        }
+      
+        .no-results {
+            text-align: center;
+            padding: 30px;
+            color: #718096;
+            display: none;
+        }
+
+        
+        
+        
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+      
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            vertical-align: top;
+        }
+
+      
+        
+        th {
+            background-color: #df1783;
+            font-weight: bold;
+            color: #fff;
+        }
+
+      
+        
+        tr:hover {
+            background-color: #f5f7fa;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        a {
+            color: #4a6bdf;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        
+        
+        a:hover {
+            text-decoration: underline;
+            color: #3a56c4;
+        }
+        
+        .back-to-top {
+            text-align: right;
+            margin-top: 30px;
+        }
+
+
+        
+        
+        .back-to-top a {
+            font-weight: bold;
+            color: #2c3e50;
+            background-color: #eaeaea;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+
+        
+        
+        .back-to-top a:hover {
+            background-color: #ddd;
+            text-decoration: none;
+        }
+
+
+        
+        
+        .thumbnail {
+            width: 120px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 15px;
+            border: 1px solid #eee;
+            float: left;
+        }
+        
+        .website-info {
+            overflow: hidden;
+        }
+        
+        .website-name {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .description {
+            color: #555;
+            font-size: 0.95em;
+        }
+        
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    </style>
+</head>
+<body>   
+
+    
+<div class="banner">
+    <h1>Custom Map Tools Collection</h1>
+    <p>Your ultimate guide to creating and embedding interactive maps with custom pins</p>
+</div>
+
+<h2 id="maps">Map Tools</h2>
+
+<blockquote>
+    <p>Resources for designing, customizing, and embedding location maps.<br>🚨 Webpages will open in a new window!</p>
+</blockquote>
+
+<div class="filter-controls">
+    <div><strong>Filter by tag:</strong></div>
+    <div class="filter-tags" id="filter-tags">
+        <!-- Tags will be added dynamically -->
+    </div>
+</div>
+
+<div class="no-results" id="no-results">
+    No resources match your selected filters.
+</div>
+
+<table id="resources-table">
+    <thead>
+        <tr>
+            <th>Website</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Table rows will be populated by JavaScript -->
+    </tbody>
+</table>
+
+<div class="back-to-top">
+    <b><a href="#maps">↥ Back To Top</a></b>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const resources = [
+            {
+                url: "https://developers.google.com/maps",
+                description: "Custom pins, routes, and interactive maps with Google's API.",
+                tags: ["API", "Custom Pins", "Embeddable", "Free Tier"]
+            },
+            {
+                url: "https://www.mapbox.com/",
+                description: "Highly customizable maps with dynamic styling and 3D views.",
+                tags: ["API", "Developer-Friendly", "Embeddable", "Free Tier"]
+            },
+            {
+                url: "https://leafletjs.com/",
+                description: "Lightweight open-source library for mobile-friendly maps.",
+                tags: ["Open Source", "Developer-Friendly", "Embeddable", "Free"]
+            },
+            {
+                url: "https://felt.com/",
+                description: "Drag-and-drop map creation with collaboration features.",
+                tags: ["User-Friendly", "No Code", "Embeddable", "Free Tier"]
+            },
+            {
+                url: "https://www.scribblemaps.com/",
+                description: "Draw tools, annotations, and custom pins for quick markups.",
+                tags: ["Annotations", "Exportable", "Free Tier"]
+            },
+            {
+                url: "https://snazzymaps.com/",
+                description: "Pre-made styles to customize Google Maps aesthetics.",
+                tags: ["Google Maps", "Themes", "Free"]
+            },
+            {
+                url: "https://www.maptive.com/",
+                description: "Business-focused tools for territory mapping and data visualization.",
+                tags: ["Business", "Data Layers", "Paid"]
+            },
+            {
+                url: "https://batchgeo.com/",
+                description: "Turn spreadsheet data into pin maps instantly.",
+                tags: ["CSV Support", "User-Friendly", "Free Tier"]
+            }
+        ];
+
+            const tableBody = document.querySelector('#resources-table tbody');
+            const filterTagsContainer = document.getElementById('filter-tags');
+            const noResultsMessage = document.getElementById('no-results');
+            
+            // Get all unique tags
+            const allTags = [...new Set(resources.flatMap(resource => resource.tags))];
+            
+            // Create filter tags
+            allTags.forEach(tag => {
+                const tagElement = document.createElement('div');
+                tagElement.className = 'filter-tag';
+                tagElement.textContent = tag;
+                tagElement.dataset.tag = tag;
+                tagElement.addEventListener('click', toggleTagFilter);
+                filterTagsContainer.appendChild(tagElement);
+            });
+            
+            // Add "All" tag that clears filters
+            const allTag = document.createElement('div');
+            allTag.className = 'filter-tag active';
+            allTag.textContent = 'All';
+            allTag.dataset.tag = 'all';
+            allTag.addEventListener('click', clearFilters);
+            filterTagsContainer.prepend(allTag);
+            
+            let activeFilters = [];
+            
+            // Render all resources initially
+            renderResources(resources);
+            
+            function toggleTagFilter(e) {
+                const tag = e.target.dataset.tag;
+                e.target.classList.toggle('active');
+                
+                if (e.target.classList.contains('active')) {
+                    activeFilters.push(tag);
+                } else {
+                    activeFilters = activeFilters.filter(t => t !== tag);
+                }
+                
+                filterResources();
+            }
+            
+            function clearFilters() {
+                activeFilters = [];
+                document.querySelectorAll('.filter-tag').forEach(tag => {
+                    tag.classList.remove('active');
+                    if (tag.dataset.tag === 'all') {
+                        tag.classList.add('active');
+                    }
+                });
+                filterResources();
+            }
+            
+            function filterResources() {
+                if (activeFilters.length === 0) {
+                    renderResources(resources);
+                    return;
+                }
+                
+                const filtered = resources.filter(resource => 
+                    activeFilters.every(filter => 
+                        resource.tags.includes(filter)
+                    )
+                );
+                
+                renderResources(filtered);
+            }
+            
+            function renderResources(resourcesToRender) {
+                tableBody.innerHTML = '';
+                
+                if (resourcesToRender.length === 0) {
+                    noResultsMessage.style.display = 'block';
+                    return;
+                } else {
+                    noResultsMessage.style.display = 'none';
+                }
+                
+                resourcesToRender.forEach(resource => {
+                    const row = document.createElement('tr');
+                    
+                    const websiteCell = document.createElement('td');
+                    websiteCell.className = 'clearfix';
+                    
+                    const img = document.createElement('img');
+                    img.className = 'thumbnail';
+                    img.src = 'https://via.placeholder.com/120x90?text=Loading...';
+                    img.alt = 'Website thumbnail';
+                    
+                    const div = document.createElement('div');
+                    div.className = 'website-info';
+                    
+                    const link = document.createElement('a');
+                    link.href = resource.url;
+                    link.target = '_blank';
+                    link.className = 'website-name';
+                    link.textContent = new URL(resource.url).hostname.replace('www.', '');
+                    
+                    // Add tags below the link
+                    const tagsContainer = document.createElement('div');
+                    tagsContainer.className = 'resource-tags';
+                    resource.tags.forEach(tag => {
+                        const tagElement = document.createElement('span');
+                        tagElement.className = 'resource-tag';
+                        tagElement.textContent = tag;
+                        tagsContainer.appendChild(tagElement);
+                    });
+                    
+                    div.appendChild(link);
+                    div.appendChild(tagsContainer);
+                    websiteCell.appendChild(img);
+                    websiteCell.appendChild(div);
+                    
+                    const descCell = document.createElement('td');
+                    descCell.className = 'description';
+                    descCell.textContent = resource.description;
+                    
+                    row.appendChild(websiteCell);
+                    row.appendChild(descCell);
+                    tableBody.appendChild(row);
+                    
+                    // Load favicon
+                    const faviconUrl = `https://www.google.com/s2/favicons?domain=${encodeURIComponent(resource.url)}&sz=64`;
+                    img.src = faviconUrl;
+                    img.onerror = function() {
+                        this.src = 'https://via.placeholder.com/120x90?text=No+Icon';
+                    };
+                });
+            }
+        });
+    </script>
+</body>
+</html>
