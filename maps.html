@@ -280,26 +280,52 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const resources = [
+
+
+            {
+                url: "https://www.atlist.com/",
+                description: "Create beautiful, shareable maps with custom pins and simple controls.",
+                tags: ["User-Friendly", "No Code", "Embeddable", "Free Tier"]
+            },
+            {
+                url: "https://batchgeo.com/",
+                description: "Turn spreadsheet data into pin maps instantly.",
+                tags: ["CSV Support", "User-Friendly", "Free Tier"]
+            },
+            
             {
                 url: "https://developers.google.com/maps",
                 description: "Custom pins, routes, and interactive maps with Google's API.",
                 tags: ["API", "Custom Pins", "Embeddable", "Free Tier"]
             },
-            {
-                url: "https://www.mapbox.com/",
-                description: "Highly customizable maps with dynamic styling and 3D views.",
-                tags: ["API", "Developer-Friendly", "Embeddable", "Free Tier"]
+
+             {
+                url: "https://felt.com/",
+                description: "Drag-and-drop map creation with collaboration features.",
+                tags: ["User-Friendly", "No Code", "Embeddable", "Free Tier"]
             },
+
+
             {
                 url: "https://leafletjs.com/",
                 description: "Lightweight open-source library for mobile-friendly maps.",
                 tags: ["Open Source", "Developer-Friendly", "Embeddable", "Free"]
             },
+
+            
             {
-                url: "https://felt.com/",
-                description: "Drag-and-drop map creation with collaboration features.",
-                tags: ["User-Friendly", "No Code", "Embeddable", "Free Tier"]
+                url: "https://www.mapbox.com/",
+                description: "Highly customizable maps with dynamic styling and 3D views.",
+                tags: ["API", "Developer-Friendly", "Embeddable", "Free Tier"]
             },
+
+             {
+                url: "https://www.maptive.com/",
+                description: "Business-focused tools for territory mapping and data visualization.",
+                tags: ["Business", "Data Layers", "Paid"]
+            },
+            
+           
             {
                 url: "https://www.scribblemaps.com/",
                 description: "Draw tools, annotations, and custom pins for quick markups.",
@@ -310,16 +336,8 @@
                 description: "Pre-made styles to customize Google Maps aesthetics.",
                 tags: ["Google Maps", "Themes", "Free"]
             },
-            {
-                url: "https://www.maptive.com/",
-                description: "Business-focused tools for territory mapping and data visualization.",
-                tags: ["Business", "Data Layers", "Paid"]
-            },
-            {
-                url: "https://batchgeo.com/",
-                description: "Turn spreadsheet data into pin maps instantly.",
-                tags: ["CSV Support", "User-Friendly", "Free Tier"]
-            }
+           
+            
         ];
 
             const tableBody = document.querySelector('#resources-table tbody');
