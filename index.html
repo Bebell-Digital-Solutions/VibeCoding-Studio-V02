@@ -359,7 +359,7 @@
             </div>
         </div>
         
-      <div class="panel">
+<div class="panel">
     <div class="panel-header">
         <span>💬 HTML Editor</span>
         <div class="panel-actions">
@@ -380,20 +380,30 @@
     &lt;meta charset="UTF-8"&gt;
     &lt;title&gt;My Page&lt;/title&gt;
     &lt;style&gt;
-        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f0f0f0; }
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 20px; 
+            background-color: #f0f0f0;
+            text-align: center; /* Center text content */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
         h1 { color: #df1783; }
         p { color: #333; }
         img {
             border-radius: 10px; /* Rounded corners */
             max-width: 100%; /* Ensure image doesn't overflow */
             height: auto;
+            margin: 20px 0; /* Add some margin around the image */
         }
     &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
     &lt;h1&gt;Welcome to VibeCoding Studio!😎&lt;/h1&gt;
     &lt;p&gt;This is a sample HTML document. Edit me as you please!&lt;/p&gt;
-    &lt;img src="https://cdn.shopify.com/s/files/1/0242/0175/6777/files/GIF_by_simongibson2000.gif?v=1749866561" alt="Description of image"&gt;
+    &lt;img src="https://example.com/path-to-your-image.jpg" alt="Description of image"&gt;
     &lt;script&gt;console.log('Sample script executed!');&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;</textarea>
@@ -660,42 +670,44 @@
             if (elements.browserInfo) elements.browserInfo.style.display = 'none';
         }
 
-        function initViewer() {
-            const htmlContent = `<!DOCTYPE html>
-                <html>
-                <head>
-                    <meta charset="UTF-8">
-                    <title>Preview</title>
-                    <style>
-                        body { 
-                            background: white; 
-                            padding: 20px; 
-                            font-family: Arial, sans-serif;
-                            color: #333;
-                        }
-                        h1 { color: #df1783; }
-                        p { color: #333; }
-			img {
+function initViewer() {
+    const htmlContent = `<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Preview</title>
+            <style>
+                body { 
+                    background: white; 
+                    padding: 20px; 
+                    font-family: Arial, sans-serif;
+                    color: #333;
+                    text-align: center; /* Center text content */
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                }
+                h1 { color: #df1783; }
+                p { color: #333; }
+                img {
                     border-radius: 10px; /* Rounded corners */
                     max-width: 100%; /* Ensure image doesn't overflow */
                     height: auto;
+                    margin: 20px 0; /* Add some margin around the image */
                 }
-                    </style>
-                </head>
-                <body>
-                    <h1>Welcome to VibeCoding Studio! 😎</h1>
-                    <p>This is a sample HTML document. Edit me as you please!</p>
-<img src="https://cdn.shopify.com/s/files/1/0242/0175/6777/files/GIF_by_simongibson2000.gif?v=1749866561
-" alt="People dancing in office">
-
-
-      
-                </body>
-                </html>`;
-            
-            elements.viewer.srcdoc = htmlContent;
-            updateViewer();
-        }
+            </style>
+        </head>
+        <body>
+            <h1>Welcome to VibeCoding Studio! 😎</h1>
+            <p>This is a sample HTML document. Edit me as you please!</p>
+            <img src="https://example.com/path-to-your-image.jpg" alt="Description of image">
+        </body>
+        </html>`;
+    
+    elements.viewer.srcdoc = htmlContent;
+    updateViewer();
+}
 
         // Initialize the application
         init();
