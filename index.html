@@ -6,7 +6,10 @@
     <title>VibeCoding Studio - 3-Panel Coding Interface</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-    <style>
+
+	
+	
+	<style>
 
 
         :root {
@@ -15,8 +18,7 @@
 	--contact: "info@bebelldigitalsolutions.com";
 	--description: "";
 	--keywords: "";
-	--last-modified: "2025-07-02";
-	--launched: "2025-06-01";
+	--last-modified: "2025-06-01";
 	--content-language: "en";
 	--generator: "HTML5, CSS3, JavaScript, Three.js, requestAnimationFrames,";
             --primary-color: #df1783;
@@ -28,7 +30,36 @@
         }
 
 
-     
+             
+    
+        .custom-image-widget {
+  position: fixed !important;
+  top: 100px !important; 
+  margin: 0 !important;
+  padding: 0 !important;
+    right: 0px; 
+        z-index: 999;
+}
+  
+    .custom-image {
+        width: 70px;
+        height: auto;
+       transition: transform 0.2s;
+    }
+    
+    
+      .custom-image-widget:hover .custom-image {
+        transform: scale(1.05); 
+    }  
+ 
+ 
+     .custom-image-widget:hover .tooltip {
+        visibility: visible;
+        opacity: 1;
+    }
+
+
+	    
         
         body, html {
             margin: 0;
@@ -279,12 +310,26 @@
     padding: 20px !important;
 }
 
+
+
+
+		
+
         
     </style>
 </head>
 <body>
 
+ <div class="custom-image-widget" style="position: relative; display: inline-block;">
+    <a href="https://elnegocio-digital.translate.goog/?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en-US&_x_tr_pto=wapp">
+        <img class="custom-image" 
+             src="https://bucket.mlcdn.com/a/3336/3336910/images/138f14304ea21715dfae64ae5fe1d71b08c2d451.png" 
+             alt="English Translation"
+             style="display: block;">
+    </a>
+</div>
 
+	
     
 <!-- In the top-bar div (keep this as is) -->
 <div class="top-bar">
@@ -468,7 +513,6 @@ margin: 0px;
             </div>
         </div>
     </div>
-
 
 
 
