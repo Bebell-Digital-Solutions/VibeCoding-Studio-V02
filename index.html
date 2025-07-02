@@ -316,19 +316,21 @@
 			<option value="https://agent.minimax.io/chat/">🤖 MiniMax AI Agent</option>    
 			<option value="https://chat.qwen.ai/">🤖 Qwen3</option>
                         <option value="https://llamacoder.together.ai/">🤖 LlamaCoder</option>
+			<option value="https://bebell-digital-solutions.github.io/VibeCoding-Studio-V02/icons">🎨 Icons Library</option>
+			<option value="https://bebell-digital-solutions.github.io/VibeCoding-Studio-V02/fonts">🎨 Fonts Library</option> 
+
                         <option value="https://html-lab.net/coding-tools">🛠️ Coding Tools</option>
                         <option value="https://webcode.tools/">🛠️ Webcode Tools</option>
                         <option value="https://bebell-digital-solutions.github.io/faq-builder-en/">🛠️ FAQ Generator</option>
                         <option value="https://bebell-digital-solutions.github.io/carousel-generator/">🛠️ Carousel Generator</option>
-			    
-                        <option value="https://bebell-digital-solutions.github.io/VibeCoding-Studio-V02/icons">🛠️ Icons Library</option>
-			<option value="https://bebell-digital-solutions.github.io/VibeCoding-Studio-V02/fonts">🛠️ Fonts Library</option> 
 			<option value="https://imageslidermaker.com/v2/">🛠️ Image Slider Creator</option>                     	    
-                        <option value="https://imageslidermaker.com/v2/">🛠️ Components Gallery</option>                     
-                        <option value="https://10015.io/tools/css-loader-generator/">🛠️ Css Loaders</option>
+		        <option value="https://imageslidermaker.com/v2/">🛠️ Components Gallery</option>                     
+                        <option value="https://10015.io/tools/css-loader-generator/">♻️ Css Loaders</option>
+
 			<option value="https://bebell-digital-solutions.github.io/VibeCoding-Studio-V02/maps">🗺️ Map & Location Tools</option> 
                         <option value="https://drive.google.com/">🗃️ Google Drive</option>
                         <option value="https://www.playbook.com/sign-in/">🗃️ PlayBook Drive</option>
+			    
                         <option value="https://chatterbot.support/asistentes">💬 AI Assistants</option> 
                     </select>
                 </div>
@@ -368,8 +370,8 @@
     </div>
 
     
-<div class="panel-content">
-    <textarea id="editor" spellcheck="false">&lt;!DOCTYPE html&gt;
+    <div class="panel-content">
+        <textarea id="editor" spellcheck="false">&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
     &lt;meta charset="UTF-8"&gt;
@@ -385,25 +387,22 @@
             align-items: center;
             justify-content: center;
         }
-        h1 { 
-            color: #df1783; 
-            margin-top: 80px;
-            margin-bottom: 10px;
-        }
-        h2 {
-            margin: 0px;
-        }
-        p { 
-            color: #333; 
-            margin-bottom: 20px;
-        }
+  h1 { 
+color: #df1783; 
+margin-top: 80px;
+margin-bottom: 10px;
+}
+h2 {
+margin: 0px;
+}
+        p { color: #333; }
         img {
             border-radius: 10px; /* Rounded corners */
             max-width: 100%; /* Ensure image doesn't overflow */
             height: auto;
             margin: 20px 0; /* Add some margin around the image */
         }
-        .cta-container {
+		        .cta-container {
             display: flex;
             gap: 15px;
             margin-bottom: 20px;
@@ -433,34 +432,32 @@
         .cta-secondary:hover {
             background-color: #f0f0f0;
         }
-        .stamp {
+	.stamp {
             width: 300px;
             height: 300px;
             object-fit: contain;
             filter: grayscale(100%);
-            opacity: 0.8;
+            opacity: 0.1;
             margin: 20px auto;
-        }
+        }	
     &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
     &lt;h1&gt;Welcome to VibeCoding Studio! 🎉&lt;/h1&gt;
-    &lt;h2&gt;Code, Preview, Ship. All in One Place 🚀&lt;/h2&gt;	
+	&lt;h2&gt;Code, Preview, Ship. All in One Place 🚀&lt;/h2&gt;	
     &lt;p&gt;This is a sample HTML document. Edit me as you please!&lt;/p&gt;
     &lt;div class="cta-container"&gt;
         &lt;a href="https://example.com" class="cta-button cta-primary"&gt;Visit Website&lt;/a&gt;
         &lt;a href="https://example.com/feedback" class="cta-button cta-secondary"&gt;Leave Feedback&lt;/a&gt;
-    &lt;/div&gt;
-    &lt;img src="https://cdn.shopify.com/s/files/1/0242/0175/6777/files/GIF_by_simongibson2000.gif?v=1749866561" alt="Animated banner"&gt;
+    &lt;/div&gt;	
+    &lt;img src="https://cdn.shopify.com/s/files/1/0242/0175/6777/files/GIF_by_simongibson2000.gif?v=1749866561" alt="Description of image"&gt;
     &lt;img class="stamp" src="https://bucket.mlcdn.com/a/3336/3336910/images/5b5c60c50f7e2cb00d7f10598ab253f4583bd258.png" alt="Decorative stamp"&gt;
     &lt;script&gt;console.log('Sample script executed!');&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;</textarea>
+    </div>
 </div>
-</div>
-
-
-	    
+        
         <div class="panel">
             <div class="panel-header">🔎 Live Preview</div>
             <div class="panel-content">
@@ -717,40 +714,39 @@
 
 function initViewer() {
     const htmlContent = `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>My Page</title>
-    <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            margin: 20px; 
-            background-color: #f0f0f0;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        h1 { 
-            color: #df1783; 
-            margin-top: 80px;
-            margin-bottom: 10px;
-        }
-        h2 {
-            margin: 0px;
-        }
-        p { 
-            color: #333; 
-            margin-bottom: 20px;
-        }
-        img {
-            border-radius: 10px;
-            max-width: 100%;
-            height: auto;
-            margin: 20px 0;
-        }
-        .cta-container {
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Preview</title>
+            <style>
+                body { 
+                    background: white; 
+                    padding: 20px; 
+                    font-family: Arial, sans-serif;
+                    color: #333;
+                    text-align: center; /* Center text content */
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                }
+  h1 { 
+color: #df1783; 
+margin-top: 80px;
+margin-bottom: 10px;
+}
+h2 {
+margin: 0px;
+}
+                p { color: #333; }
+                img {
+                    border-radius: 10px; /* Rounded corners */
+                    max-width: 100%; /* Ensure image doesn't overflow */
+                    height: auto;
+                    margin: 20px 0; /* Add some margin around the image */
+                }
+
+          .cta-container {
             display: flex;
             gap: 15px;
             margin-bottom: 20px;
@@ -780,26 +776,40 @@ function initViewer() {
         .cta-secondary:hover {
             background-color: #f0f0f0;
         }
-        .stamp {
+
+ .stamp {
             width: 300px;
             height: 300px;
             object-fit: contain;
             filter: grayscale(100%);
-            opacity: 0.8;
+            opacity: 0.1;
             margin: 20px auto;
         }
-    </style>
-</head>
-<body>
-    <h1>Welcome to VibeCoding Studio! 🎉</h1>
-    <h2>Code, Preview, Ship. All in One Place 🚀</h2>	
-    <p>This is a sample HTML document. Edit me as you please!</p>
-    <div class="cta-container">
+            </style>
+        </head>
+        <body>
+            <h1>Welcome to VibeCoding Studio! 🎉</h1>
+	    <h2>Code, Preview, Ship. All in One Place 🚀</h2>
+            <p>This is a sample HTML document. Edit me as you please!</p>
+	       <div class="cta-container">
         <a href="https://example.com" class="cta-button cta-primary">Visit Website</a>
         <a href="https://example.com/feedback" class="cta-button cta-secondary">Leave Feedback</a>
     </div>
-    <img src="https://cdn.shopify.com/s/files/1/0242/0175/6777/files/GIF_by_simongibson2000.gif?v=1749866561" alt="Animated banner">
-    <img class="stamp" src="https://bucket.mlcdn.com/a/3336/3336910/images/5b5c60c50f7e2cb00d7f10598ab253f4583bd258.png" alt="Decorative stamp">
-    <script>console.log('Sample script executed!');</script>
+            <img src="https://cdn.shopify.com/s/files/1/0242/0175/6777/files/GIF_by_simongibson2000.gif?v=1749866561" alt="Description of image">
+    <img class="stamp" src="https://bucket.mlcdn.com/a/3336/3336910/images/5b5c60c50f7e2cb00d7f10598ab253f4583bd258.png" alt="VibeCoding Studio">  
+	    
+        </body>
+        </html>`;
+    
+    elements.viewer.srcdoc = htmlContent;
+    updateViewer();
+}
+
+        // Initialize the application
+        init();
+    })();
+</script>
+
+ 
 </body>
 </html>
